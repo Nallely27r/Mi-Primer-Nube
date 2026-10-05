@@ -1,35 +1,1639 @@
-html
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <title>Mi Monitor Cloud</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f9; padding: 50px; }
-        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
-        h1 { color: #333; }
-        #precio { font-size: 24px; color: #2ecc71; font-weight: bold; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SHEGLAM | Trust & Beauty Hub - Shade Matcher & Community Reviews</title>
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons for luxury clean icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blush: '#FBECEB',
+              rose: '#EFA9A5',
+              deeprose: '#D97379',
+              nude: '#F7EFE9',
+              gold: '#D4AF37',
+              darkgold: '#B8860B',
+              charcoal: '#221F20',
+              cream: '#FDFBF7'
+            }
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    /* Smooth custom scrollbars */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #fdfbf7; }
+    ::-webkit-scrollbar-thumb { background: #EFA9A5; border-radius: 9999px; }
+    
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #E5C158 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .badge-glow {
+      box-shadow: 0 0 15px rgba(239, 169, 165, 0.4);
+    }
+    .swatch-glow {
+      box-shadow: 0 4px 14px 0 rgba(217, 115, 121, 0.35);
+    }
+  </style>
 </head>
-<body>
-    <div class="card">
-        <h1>Precio del Bitcoin en la Nube</h1>
-        <p>Este dato se obtiene consultando una API externa en tiempo real:</p>
-        <div id="precio">Cargando...</div>
-    </div>
+<body class="bg-brand-cream text-brand-charcoal font-sans antialiased selection:bg-brand-rose selection:text-white">
 
-    <script>
-        // Consultamos una API pública en la nube (CoinGecko)
-        fetch('https://coingecko.com')
-            .then(response => response.json())
-            .then(data => {
-                const usdPrice = data.bitcoin.usd;
-                document.getElementById('precio').innerText = $${usdPrice.toLocaleString()} USD;
-            })
-            .catch(error => {
-                document.getElementById('precio').innerText = "Error al conectar con la API";
-                console.error(error);
-            });
-    </script>
+  <!-- Notification Banner -->
+  <aside class="bg-gradient-to-r from-brand-deeprose via-brand-rose to-brand-gold text-white text-xs py-2 px-4 text-center font-medium tracking-wide flex items-center justify-center gap-2" aria-label="Anuncios">
+    <i class="ph ph-sparkle text-sm animate-pulse" aria-hidden="true"></i>
+    <span>¡Encuentra tu tono ideal con un 98.4% de precisión! Garantía de Satisfacción Total SHEGLAM</span>
+    <span class="hidden sm:inline bg-white/20 px-2 py-0.5 rounded-full text-[10px] uppercase font-bold tracking-widest ml-2">Cruelty-Free Leaping Bunny</span>
+  </aside>
+
+  <header class="sticky top-0 z-40 glass-nav border-b border-brand-rose/20 transition-all duration-300 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <div class="flex items-center gap-3">
+        <a href="#" class="group flex flex-col">
+          <span class="font-serif text-2xl sm:text-3xl font-extrabold tracking-widest text-brand-charcoal group-hover:text-brand-deeprose transition-colors">SHEGLAM</span>
+          <span class="text-[9px] uppercase tracking-[0.25em] text-brand-darkgold font-semibold">Trust & Beauty Hub</span>
+        </a>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-brand-charcoal/80">
+        <a href="#shade-matcher" class="hover:text-brand-deeprose transition-colors flex items-center gap-1.5"><i class="ph ph-palette"></i> Shade Matcher</a>
+        <a href="#simulator" class="hover:text-brand-deeprose transition-colors flex items-center gap-1.5"><i class="ph ph-magic-wand"></i> Simulador</a>
+        <a href="#community-reviews" class="hover:text-brand-deeprose transition-colors flex items-center gap-1.5"><i class="ph ph-chat-circle-dots"></i> Reseñas & Fotos</a>
+        <a href="#dupes" class="hover:text-brand-deeprose transition-colors flex items-center gap-1.5"><i class="ph ph-scales"></i> Dupes & Ahorro</a>
+        <a href="#guarantee" class="hover:text-brand-deeprose transition-colors flex items-center gap-1.5"><i class="ph ph-shield-check"></i> Confianza</a>
+      </nav>
+
+      <!-- Cart & Quick Actions -->
+      <div class="flex items-center gap-3">
+        <button id="cart-toggle-btn" class="relative p-2.5 rounded-full bg-brand-blush hover:bg-brand-rose/30 transition-all text-brand-charcoal">
+          <i class="ph ph-shopping-bag text-xl"></i>
+          <span id="cart-badge" class="absolute -top-1 -right-1 bg-brand-deeprose text-white text-[10px] w-5 h-5 font-bold rounded-full flex items-center justify-center">0</span>
+        </button>
+        <a href="#shade-matcher" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-charcoal text-white hover:bg-brand-deeprose text-xs font-semibold tracking-wider uppercase transition-all shadow-md">
+          <i class="ph ph-crosshair"></i> Test de Tono
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-brand-nude/40 via-brand-blush/20 to-transparent">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-blush border border-brand-rose/40 text-xs font-semibold text-brand-deeprose">
+              <i class="ph ph-seal-check text-base"></i> 100% Sin Sorpresas al Recibir tu Maquillaje
+            </div>
+            <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-bold leading-tight">
+              Compra con total certeza: <span class="italic font-normal gold-gradient-text">mira cómo luce en tu piel</span> antes de ordenar.
+            </h1>
+            <p class="text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
+              La plataforma comunitaria de SHEGLAM donde exploras swatches reales clasificados por subtono, pruebas acabados con nuestro simulador y lees más de 45,000 reseñas verificadas.
+            </p>
+
+            <!-- Metrics bar -->
+            <div class="pt-4 grid grid-cols-3 gap-4 border-t border-brand-rose/20 max-w-md mx-auto lg:mx-0">
+              <div>
+                <p class="font-serif text-2xl font-bold text-brand-deeprose">98.4%</p>
+                <p class="text-xs text-gray-500 font-medium">Acierto en subtono</p>
+              </div>
+              <div>
+                <p class="font-serif text-2xl font-bold text-brand-deeprose">4.9/5</p>
+                <p class="text-xs text-gray-500 font-medium">+150K Reseñas</p>
+              </div>
+              <div>
+                <p class="font-serif text-2xl font-bold text-brand-deeprose">100%</p>
+                <p class="text-xs text-gray-500 font-medium">Cruelty Free</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+              <a href="#shade-matcher" class="px-7 py-3.5 rounded-full bg-brand-deeprose hover:bg-brand-charcoal text-white font-medium text-sm transition-all shadow-lg hover:shadow-brand-rose/50 flex items-center gap-2">
+                <i class="ph ph-sparkle text-lg"></i> Probar Shade Matcher
+              </a>
+              <a href="#dupes" class="px-7 py-3.5 rounded-full bg-white border border-brand-charcoal/20 hover:border-brand-deeprose text-brand-charcoal text-sm font-medium transition-all flex items-center gap-2">
+                <i class="ph ph-git-diff"></i> Ver Comparativas SHEGLAM
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero interactive card display -->
+          <div class="lg:col-span-5 relative">
+            <div class="relative mx-auto max-w-md bg-white p-6 rounded-3xl shadow-xl border border-brand-blush">
+              <div class="absolute -top-3 -right-3 bg-brand-gold text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md">
+                BEST SELLER #1 VIRAL
+              </div>
+              <div class="flex items-center gap-4 mb-4">
+                <div class="w-14 h-14 rounded-2xl bg-brand-blush flex items-center justify-center text-3xl">
+                  🌸
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 leading-tight">Color Bloom Liquid Blush</h3>
+                  <p class="text-xs text-gray-500">Tono: <span id="hero-active-shade-name" class="font-semibold text-brand-deeprose">Love Cake</span></p>
+                  <div class="flex items-center gap-1 text-amber-400 text-xs mt-0.5">
+                    <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+                    <span class="text-gray-500 text-[11px] ml-1">(42,890 reseñas)</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive Swatch preview previewer in hero -->
+              <div class="rounded-2xl p-4 bg-brand-nude/30 border border-brand-rose/20 text-center relative overflow-hidden">
+                <p class="text-xs text-gray-600 mb-2 font-medium">Previsualización en piel Neutra / Fair:</p>
+                <div id="hero-swatch-display" class="h-28 rounded-xl flex items-center justify-center transition-all duration-500 relative overflow-hidden shadow-inner" style="background-color: #F8DFD4;">
+                  <div id="hero-blush-blend" class="w-32 h-20 rounded-full blur-md opacity-85 transition-all duration-500 transform rotate-12" style="background: radial-gradient(circle, #ED929C 20%, transparent 80%);"></div>
+                  <span class="absolute bottom-2 right-2 text-[10px] bg-white/80 backdrop-blur px-2 py-0.5 rounded text-gray-700 font-semibold shadow-xs">Acabado Mate Natural</span>
+                </div>
+                <!-- Mini Tone Switcher -->
+                <div class="flex items-center justify-center gap-2 mt-4">
+                  <span class="text-[11px] text-gray-500">Cambiar tono:</span>
+                  <button onclick="setHeroShade('Love Cake', '#ED929C', 'Mate Sedoso')" class="w-6 h-6 rounded-full border-2 border-white shadow hover:scale-110 transition-transform" style="background-color: #ED929C;" title="Love Cake"></button>
+                  <button onclick="setHeroShade('Birthday Suit', '#D98980', 'Dewy Glow')" class="w-6 h-6 rounded-full border-2 border-white shadow hover:scale-110 transition-transform" style="background-color: #D98980;" title="Birthday Suit"></button>
+                  <button onclick="setHeroShade('Rose Ritual', '#BE5A68', 'Mate Profundo')" class="w-6 h-6 rounded-full border-2 border-white shadow hover:scale-110 transition-transform" style="background-color: #BE5A68;" title="Rose Ritual"></button>
+                  <button onclick="setHeroShade('Float On', '#E67B66', 'Sun-Kissed')" class="w-6 h-6 rounded-full border-2 border-white shadow hover:scale-110 transition-transform" style="background-color: #E67B66;" title="Float On"></button>
+                </div>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
+                <span class="flex items-center gap-1 text-emerald-600 font-medium"><i class="ph-fill ph-check-circle"></i> Textura esponjosa</span>
+                <span class="font-bold text-gray-900 text-sm">$4.99 USD</span>
+                <button onclick="quickAddToCart('Color Bloom Liquid Blush', 'Love Cake', 4.99)" class="bg-brand-rose/30 hover:bg-brand-deeprose hover:text-white text-brand-deeprose font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                  Añadir
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section id="shade-matcher" class="py-20 bg-white border-y border-brand-rose/20 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="text-xs uppercase tracking-widest text-brand-darkgold font-bold bg-brand-nude px-3 py-1 rounded-full border border-brand-gold/30">Motor de Color de Alta Precisión</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mt-3">Interactive Shade & Undertone Matcher</h2>
+          <p class="text-gray-600 mt-2 text-sm sm:text-base">
+            Elige tu nivel de piel y tu subtono. Te mostramos exactamente el color que mejor armoniza y cómo se difumina en piel real.
+          </p>
+        </div>
+
+        <div class="bg-brand-cream/70 rounded-3xl p-6 sm:p-10 border border-brand-rose/30 shadow-lg grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          <!-- Controls Panel -->
+          <div class="lg:col-span-6 space-y-8">
+            
+            <!-- Step 1: Skin Depth -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-3 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-brand-deeprose text-white text-[11px] flex items-center justify-center font-bold">1</span>
+                Tono de Piel (Skin Depth)
+              </label>
+              <div class="grid grid-cols-5 gap-2 sm:gap-3" id="skin-depth-container">
+                <!-- Dynamically generated or interactive buttons -->
+                <button onclick="selectSkinDepth('fair', '#FCEEE7', 'Fair / Muy Claro')" class="skin-btn p-2 rounded-2xl border-2 border-brand-deeprose bg-white text-center transition-all hover:scale-105" data-depth="fair">
+                  <div class="w-10 h-10 rounded-full mx-auto mb-1.5 border border-black/10 shadow-inner" style="background-color: #FDF0E7;"></div>
+                  <span class="text-[11px] font-semibold block">Fair</span>
+                </button>
+                <button onclick="selectSkinDepth('light', '#F5DFC8', 'Light / Claro')" class="skin-btn p-2 rounded-2xl border-2 border-transparent bg-white text-center transition-all hover:scale-105" data-depth="light">
+                  <div class="w-10 h-10 rounded-full mx-auto mb-1.5 border border-black/10 shadow-inner" style="background-color: #F5DFC8;"></div>
+                  <span class="text-[11px] font-semibold block">Light</span>
+                </button>
+                <button onclick="selectSkinDepth('medium', '#E0B58D', 'Medium / Medio')" class="skin-btn p-2 rounded-2xl border-2 border-transparent bg-white text-center transition-all hover:scale-105" data-depth="medium">
+                  <div class="w-10 h-10 rounded-full mx-auto mb-1.5 border border-black/10 shadow-inner" style="background-color: #E0B58D;"></div>
+                  <span class="text-[11px] font-semibold block">Medium</span>
+                </button>
+                <button onclick="selectSkinDepth('tan', '#B87A4F', 'Tan / Bronceado')" class="skin-btn p-2 rounded-2xl border-2 border-transparent bg-white text-center transition-all hover:scale-105" data-depth="tan">
+                  <div class="w-10 h-10 rounded-full mx-auto mb-1.5 border border-black/10 shadow-inner" style="background-color: #B87A4F;"></div>
+                  <span class="text-[11px] font-semibold block">Tan</span>
+                </button>
+                <button onclick="selectSkinDepth('deep', '#5E3826', 'Deep / Oscuro')" class="skin-btn p-2 rounded-2xl border-2 border-transparent bg-white text-center transition-all hover:scale-105" data-depth="deep">
+                  <div class="w-10 h-10 rounded-full mx-auto mb-1.5 border border-black/10 shadow-inner" style="background-color: #5E3826;"></div>
+                  <span class="text-[11px] font-semibold block">Deep</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Undertone -->
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <label class="text-xs font-bold uppercase tracking-wider text-gray-700 flex items-center gap-2">
+                  <span class="w-5 h-5 rounded-full bg-brand-deeprose text-white text-[11px] flex items-center justify-center font-bold">2</span>
+                  Subtono (Undertone)
+                </label>
+                <button onclick="openUndertoneHelperModal()" class="text-xs text-brand-darkgold hover:underline flex items-center gap-1 font-medium">
+                  <i class="ph ph-question"></i> ¿Cómo saber mi subtono?
+                </button>
+              </div>
+              <div class="grid grid-cols-3 gap-3" id="undertone-container">
+                <button onclick="selectUndertone('warm', 'Cálido (Dorado/Oliva)')" class="undertone-btn p-3 rounded-2xl border-2 border-transparent bg-white text-left transition-all hover:shadow-sm" data-undertone="warm">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full bg-amber-400"></span>
+                    <span class="font-bold text-xs text-gray-800">Cálido</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 mt-1">Venas verdes, joyas doradas</p>
+                </button>
+                <button onclick="selectUndertone('neutral', 'Neutro (Balanceado)')" class="undertone-btn p-3 rounded-2xl border-2 border-brand-deeprose bg-white text-left transition-all hover:shadow-sm" data-undertone="neutral">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full bg-rose-300"></span>
+                    <span class="font-bold text-xs text-gray-800">Neutro</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 mt-1">Venas azul-verdosas, neutro</p>
+                </button>
+                <button onclick="selectUndertone('cool', 'Frío (Rosado/Rojizo)')" class="undertone-btn p-3 rounded-2xl border-2 border-transparent bg-white text-left transition-all hover:shadow-sm" data-undertone="cool">
+                  <div class="flex items-center gap-2">
+                    <span class="w-3.5 h-3.5 rounded-full bg-blue-300"></span>
+                    <span class="font-bold text-xs text-gray-800">Frío</span>
+                  </div>
+                  <p class="text-[11px] text-gray-500 mt-1">Venas azules/violeta, plata</p>
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Product Category Selection -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-gray-700 mb-3 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-brand-deeprose text-white text-[11px] flex items-center justify-center font-bold">3</span>
+                Producto a Comprobar
+              </label>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="selectCategory('blush')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold bg-brand-charcoal text-white transition-all" data-cat="blush">Color Bloom Blush</button>
+                <button onclick="selectCategory('foundation')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-gray-700 border border-gray-200 hover:border-brand-deeprose transition-all" data-cat="foundation">Skinfinite Foundation</button>
+                <button onclick="selectCategory('lip')" class="cat-btn px-4 py-2 rounded-xl text-xs font-semibold bg-white text-gray-700 border border-gray-200 hover:border-brand-deeprose transition-all" data-cat="lip">Plump Lip Balm</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Live Swatch & Result Canvas -->
+          <div class="lg:col-span-6 bg-white rounded-2xl p-6 border border-brand-rose/20 shadow-md flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+                <div>
+                  <span class="text-[11px] font-bold uppercase tracking-wider text-brand-darkgold">Match Recomendado</span>
+                  <h3 id="matched-product-name" class="font-serif text-xl font-bold text-gray-900">Color Bloom Blush - Love Cake</h3>
+                </div>
+                <span id="match-confidence-badge" class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs px-2.5 py-1 rounded-full font-bold flex items-center gap-1">
+                  <i class="ph-fill ph-check-circle"></i> 99.2% Match
+                </span>
+              </div>
+
+              <!-- Visual Skin Canvas with Swatch Spot -->
+              <div class="my-6">
+                <p class="text-xs text-gray-500 mb-2 font-medium">Previsualización de la mancha/swatch difuminado en tu base elegida:</p>
+                <div id="matcher-skin-canvas" class="h-44 rounded-2xl w-full relative flex items-center justify-center overflow-hidden transition-colors duration-500 shadow-inner" style="background-color: #FCEEE7;">
+                  <!-- Arm skin texture lines subtle simulation -->
+                  <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                  
+                  <!-- Pure Swatch Drop & Blend -->
+                  <div class="relative z-10 flex items-center gap-8">
+                    <!-- Concentrated Drop -->
+                    <div class="text-center">
+                      <div id="matcher-drop-color" class="w-10 h-10 rounded-full mx-auto shadow-md border-2 border-white/50 transition-colors duration-500" style="background-color: #ED929C;"></div>
+                      <span class="text-[10px] text-gray-800 font-semibold mt-1 block">Tono Puro</span>
+                    </div>
+
+                    <i class="ph ph-arrow-right text-gray-400 text-xl font-bold"></i>
+
+                    <!-- Blended/Diffused Swatch -->
+                    <div class="text-center">
+                      <div id="matcher-blend-color" class="w-24 h-16 rounded-full blur-md opacity-90 transition-all duration-500 shadow-sm" style="background: radial-gradient(circle, #ED929C 20%, transparent 80%);"></div>
+                      <span class="text-[10px] text-gray-800 font-semibold mt-1 block">Difuminado en Piel</span>
+                    </div>
+                  </div>
+
+                  <div class="absolute bottom-2 left-3 bg-white/70 backdrop-blur-sm px-2.5 py-0.5 rounded text-[11px] font-medium text-gray-700" id="matcher-canvas-legend">
+                    Piel: Fair | Subtono: Neutro
+                  </div>
+                </div>
+              </div>
+
+              <!-- Recommendation breakdown -->
+              <div class="bg-brand-blush/40 rounded-xl p-4 text-xs space-y-2 border border-brand-rose/20">
+                <div class="flex justify-between text-gray-700">
+                  <span class="font-medium">¿Por qué te favorece?</span>
+                  <span id="matcher-reason" class="font-bold text-brand-deeprose">Neutraliza rojeces y aporta luminosidad juvenil.</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                  <span>Cobertura recomendada:</span>
+                  <span class="font-semibold text-gray-800">Modulable de ligera a intensa</span>
+                </div>
+                <div class="flex justify-between text-gray-600">
+                  <span>Duración testeada:</span>
+                  <span class="font-semibold text-emerald-600 font-bold">Hasta 12 horas intacto</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action button -->
+            <div class="pt-6 mt-4 border-t border-gray-100 flex items-center justify-between">
+              <div>
+                <span class="text-xs text-gray-400 line-through mr-1">$7.50</span>
+                <span id="matcher-price" class="text-lg font-bold text-gray-900">$4.99 USD</span>
+              </div>
+              <button id="matcher-add-btn" onclick="addMatchedToCart()" class="px-6 py-2.5 rounded-xl bg-brand-deeprose hover:bg-brand-charcoal text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-md flex items-center gap-2">
+                <i class="ph ph-bag"></i> Añadir Match a la Bolsa
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="py-20 bg-brand-cream relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-widest text-brand-deeprose font-bold">Realidad sin Filtros</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mt-2">Comparador Interactivo: Antes & Después</h2>
+          <p class="text-gray-600 text-sm mt-2">
+            Desliza la barra central para verificar la cobertura real de textura, poros y uniformidad de tono.
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-white p-4 sm:p-6 rounded-3xl shadow-xl border border-brand-rose/20">
+          
+          <!-- Mode Switcher -->
+          <div class="flex justify-center gap-3 mb-6">
+            <button onclick="setComparisonMode('pores')" class="comp-btn active px-4 py-1.5 rounded-full text-xs font-bold bg-brand-deeprose text-white shadow-sm" id="btn-comp-pores">Skinfinite: Poros & Textura</button>
+            <button onclick="setComparisonMode('blush')" class="comp-btn px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700 hover:bg-brand-blush" id="btn-comp-blush">Color Bloom: Efecto Lifting</button>
+          </div>
+
+          <!-- Slider Container -->
+          <div class="relative w-full h-80 sm:h-96 rounded-2xl overflow-hidden select-none border border-gray-200" id="comparison-box">
+            
+            <!-- Underneath image/layer (AFTER) -->
+            <div class="absolute inset-0 w-full h-full flex items-center justify-center" id="after-layer" style="background: linear-gradient(135deg, #F9E0D9 0%, #F5CEBE 100%);">
+              <div class="text-center p-6 space-y-2">
+                <span class="inline-block px-3 py-1 bg-white/80 backdrop-blur rounded-full text-xs font-bold text-brand-deeprose shadow-sm">
+                  ✨ CON SHEGLAM
+                </span>
+                <h4 class="font-serif text-2xl font-bold text-gray-800" id="after-title">Piel Aterciopelada & Poros Suavizados</h4>
+                <p class="text-xs max-w-md text-gray-600" id="after-desc">Acabado soft-focus resistente al agua y sudor, sin efecto acartonado.</p>
+                <div class="inline-flex items-center gap-2 text-xs text-emerald-700 font-semibold bg-emerald-100/70 px-3 py-1 rounded-md">
+                  <i class="ph-fill ph-sparkle"></i> Cero transferencia comprobada
+                </div>
+              </div>
+            </div>
+
+            <!-- Overlaid layer (BEFORE) with clip path -->
+            <div class="absolute inset-0 h-full flex items-center justify-center overflow-hidden" id="before-layer" style="width: 50%; background: linear-gradient(135deg, #E6C7BE 0%, #D8ABA0 100%); border-right: 2px solid white;">
+              <div class="absolute w-[800px] h-full flex items-center justify-center text-center p-6 space-y-2">
+                <div>
+                  <span class="inline-block px-3 py-1 bg-black/60 backdrop-blur rounded-full text-xs font-bold text-white shadow-sm">
+                    SIN MAQUILLAJE
+                  </span>
+                  <h4 class="font-serif text-2xl font-bold text-gray-900" id="before-title">Tono Irregular & Rojeces</h4>
+                  <p class="text-xs max-w-md text-gray-800" id="before-desc">Textura visible y pérdida de luminosidad natural.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Draggable handle -->
+            <div id="slider-handle" class="absolute top-0 bottom-0 w-8 -ml-4 flex items-center justify-center cursor-ew-resize z-20" style="left: 50%;">
+              <div class="w-8 h-8 rounded-full bg-white shadow-2xl border-2 border-brand-deeprose flex items-center justify-center text-brand-deeprose text-sm">
+                <i class="ph ph-arrows-left-right"></i>
+              </div>
+            </div>
+
+            <input type="range" min="0" max="100" value="50" class="absolute inset-0 opacity-0 cursor-ew-resize w-full h-full z-30" id="slider-input" aria-label="Slider de antes y después">
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-gray-500 mt-4 px-2">
+            <span>← Desliza hacia la izquierda para ver el resultado</span>
+            <span>Desliza a la derecha para ver la piel al natural →</span>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="simulator" class="py-20 bg-white border-y border-brand-rose/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-5 space-y-6">
+            <span class="text-xs uppercase tracking-widest text-brand-darkgold font-bold bg-brand-nude px-3 py-1 rounded-full border border-brand-gold/30">Laboratorio Digital</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal">Virtual Finish & Intensity Simulator</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Prueba los 3 acabados insignia de SHEGLAM: **Dewy** (jugoso e hidratado), **Matte** (anti-brillos aterciopelado) o **Glow** (destellos aperlados de alta gama). Ajusta la intensidad de pigmento a tu preferencia.
+            </p>
+
+            <!-- Finish Selectors -->
+            <div class="space-y-3">
+              <label class="text-xs font-bold uppercase tracking-wider text-gray-700">Elige el Acabado Deseado:</label>
+              <div class="grid grid-cols-3 gap-3">
+                <button onclick="setSimFinish('dewy')" class="finish-btn p-3 rounded-2xl border-2 border-brand-deeprose bg-brand-blush/30 text-center transition-all" data-finish="dewy">
+                  <i class="ph ph-drop text-xl text-brand-deeprose block mx-auto mb-1"></i>
+                  <span class="text-xs font-bold block text-gray-900">Dewy</span>
+                  <span class="text-[10px] text-gray-500">Piel Jugosa</span>
+                </button>
+                <button onclick="setSimFinish('matte')" class="finish-btn p-3 rounded-2xl border-2 border-transparent bg-gray-50 text-center transition-all hover:bg-brand-blush/20" data-finish="matte">
+                  <i class="ph ph-circle-half text-xl text-gray-600 block mx-auto mb-1"></i>
+                  <span class="text-xs font-bold block text-gray-900">Matte</span>
+                  <span class="text-[10px] text-gray-500">Soft Focus</span>
+                </button>
+                <button onclick="setSimFinish('glow')" class="finish-btn p-3 rounded-2xl border-2 border-transparent bg-gray-50 text-center transition-all hover:bg-brand-blush/20" data-finish="glow">
+                  <i class="ph ph-sparkle text-xl text-amber-500 block mx-auto mb-1"></i>
+                  <span class="text-xs font-bold block text-gray-900">Glow</span>
+                  <span class="text-[10px] text-gray-500">Microperlas</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Intensity Range -->
+            <div class="space-y-2 pt-2">
+              <div class="flex justify-between items-center text-xs">
+                <span class="font-bold text-gray-700">Intensidad de Aplicación:</span>
+                <span id="intensity-label" class="font-bold text-brand-deeprose">Natural (2 gotas)</span>
+              </div>
+              <input type="range" id="intensity-slider" min="1" max="3" value="2" step="1" oninput="updateIntensity(this.value)" class="w-full accent-brand-deeprose cursor-pointer" aria-label="Intensidad de aplicación">
+              <div class="flex justify-between text-[11px] text-gray-400">
+                <span>1 gota (Sutil)</span>
+                <span>2 gotas (Ideal diario)</span>
+                <span>3 gotas (Glam intenso)</span>
+              </div>
+            </div>
+
+            <!-- Pro Tip Note -->
+            <div class="p-3.5 rounded-xl bg-amber-50 border border-amber-200 flex items-start gap-2.5 text-xs text-amber-900">
+              <i class="ph-fill ph-lightbulb text-base text-amber-600 shrink-0 mt-0.5"></i>
+              <p id="finish-tip"><strong>Consejo Pro Dewy:</strong> Ideal para piel seca a mixta. Aplica con esponja ligeramente humedecida para fusionar con tu crema hidratante.</p>
+            </div>
+          </div>
+
+          <!-- Simulator Canvas Box -->
+          <div class="lg:col-span-7">
+            <div class="bg-brand-cream rounded-3xl p-6 sm:p-8 border border-brand-rose/30 shadow-lg text-center relative overflow-hidden">
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Simulación en Tiempo Real</span>
+                <span id="active-sim-badge" class="px-2.5 py-0.5 bg-brand-rose/20 text-brand-deeprose rounded-full text-xs font-semibold">Dewy Radiante</span>
+              </div>
+
+              <!-- Cheek representation -->
+              <div id="sim-display-area" class="h-64 sm:h-72 w-full rounded-2xl relative overflow-hidden flex items-center justify-center shadow-inner transition-all duration-500" style="background: linear-gradient(145deg, #F7E4DE 0%, #EED5CC 100%);">
+                <!-- Lighting highlight simulating gloss/dewy/matte -->
+                <div id="sim-highlight" class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent transition-opacity duration-500 opacity-60"></div>
+                
+                <!-- Swatch color spot on the 'cheek' -->
+                <div id="sim-blush-patch" class="w-48 h-36 rounded-full blur-xl transition-all duration-500" style="background: radial-gradient(circle, #ED929C 30%, transparent 75%); opacity: 0.75; transform: scale(1.1);"></div>
+
+                <!-- Glow sparkles (visible only in glow mode) -->
+                <div id="sim-sparkles" class="absolute inset-0 pointer-events-none hidden flex items-center justify-center">
+                  <i class="ph-fill ph-sparkle text-amber-300 text-xl absolute top-12 left-1/3 animate-ping"></i>
+                  <i class="ph-fill ph-sparkle text-amber-200 text-lg absolute bottom-12 right-1/3 animate-pulse"></i>
+                </div>
+
+                <!-- Text Badge on top of canvas -->
+                <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-lg shadow-sm text-left">
+                  <p class="text-[10px] text-gray-500 uppercase tracking-widest font-semibold">Resultado de Textura</p>
+                  <p id="sim-texture-result" class="text-xs font-bold text-gray-900">Efecto Hidratación Profunda con Reflejo de Luz</p>
+                </div>
+              </div>
+
+              <div class="mt-4 flex items-center justify-center gap-3">
+                <span class="text-xs text-gray-500 font-medium">Color simulado: <strong>Birthday Suit (Nude cálido)</strong></span>
+                <button onclick="quickAddToCart('Color Bloom Liquid Blush (Dewy)', 'Birthday Suit', 4.99)" class="text-xs bg-brand-charcoal text-white hover:bg-brand-deeprose px-4 py-2 rounded-xl transition-colors font-semibold">
+                  Añadir con esta configuración ($4.99)
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section id="dupes" class="py-20 bg-brand-cream/60">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto mb-14">
+          <span class="text-xs uppercase tracking-widest text-brand-darkgold font-bold bg-brand-nude px-3 py-1 rounded-full border border-brand-gold/30">Ahorro Inteligente</span>
+          <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mt-2">SHEGLAM vs Marcas de Lujo</h2>
+          <p class="text-gray-600 text-sm mt-2">
+            Misma pigmentación, mayor rendimiento, 100% libre de crueldad animal y a una fracción del costo.
+          </p>
+        </div>
+
+        <!-- Comparison Table Card -->
+        <div class="bg-white rounded-3xl shadow-xl border border-brand-rose/20 overflow-hidden">
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-gray-200 bg-brand-nude/30 text-xs text-gray-500 uppercase tracking-wider">
+                  <th class="p-5 font-bold">Característica</th>
+                  <th class="p-5 font-bold text-brand-deeprose bg-brand-blush/40 text-center">
+                    <span class="text-sm font-serif tracking-normal text-brand-charcoal block">SHEGLAM Color Bloom</span>
+                    Garantía Viral
+                  </th>
+                  <th class="p-5 font-bold text-gray-600 text-center">Marca de Lujo "R" ($23 USD)</th>
+                  <th class="p-5 font-bold text-gray-600 text-center">Marca de Lujo "C" ($34 USD)</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-100 text-sm">
+                <tr>
+                  <td class="p-5 font-semibold text-gray-800">Precio promedio</td>
+                  <td class="p-5 bg-brand-blush/20 text-center font-extrabold text-brand-deeprose text-lg">$4.99 USD</td>
+                  <td class="p-5 text-center text-gray-500 font-medium">$23.00 USD</td>
+                  <td class="p-5 text-center text-gray-500 font-medium">$34.00 USD</td>
+                </tr>
+                <tr>
+                  <td class="p-5 font-semibold text-gray-800">Aplicador integrado</td>
+                  <td class="p-5 bg-brand-blush/20 text-center font-medium text-emerald-600">
+                    <i class="ph-fill ph-check-circle text-lg inline align-middle"></i> Esponja Cushion dosificadora
+                  </td>
+                  <td class="p-5 text-center text-gray-600">Aplicador Doe-Foot tradicional</td>
+                  <td class="p-5 text-center text-gray-600">Tubo presurizado (desperdicio)</td>
+                </tr>
+                <tr>
+                  <td class="p-5 font-semibold text-gray-800">Certificación Cruelty-Free</td>
+                  <td class="p-5 bg-brand-blush/20 text-center font-medium text-emerald-600">
+                    <i class="ph-fill ph-check-circle text-lg inline align-middle"></i> Certificado Leaping Bunny
+                  </td>
+                  <td class="p-5 text-center text-gray-600">Cruelty-Free</td>
+                  <td class="p-5 text-center text-rose-500">Vende en mercados con testeo</td>
+                </tr>
+                <tr>
+                  <td class="p-5 font-semibold text-gray-800">Ingredientes de Cuidado</td>
+                  <td class="p-5 bg-brand-blush/20 text-center font-semibold text-gray-800">
+                    Vitamina C + Extracto de Rosa Silvestre
+                  </td>
+                  <td class="p-5 text-center text-gray-500">Extractos botánicos básicos</td>
+                  <td class="p-5 text-center text-gray-500">Siliconas estándar</td>
+                </tr>
+                <tr>
+                  <td class="p-5 font-semibold text-gray-800">Duración comprobada</td>
+                  <td class="p-5 bg-brand-blush/20 text-center font-bold text-gray-800">12 Horas Soft-Wear</td>
+                  <td class="p-5 text-center text-gray-600">8 Horas</td>
+                  <td class="p-5 text-center text-gray-600">10 Horas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <div class="p-6 bg-brand-nude/40 border-t border-brand-rose/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 text-xs text-gray-700">
+              <i class="ph-fill ph-piggy-bank text-xl text-brand-darkgold"></i>
+              <span><strong>Ahorras hasta un 82%</strong> con la misma calidad de formulación internacional.</span>
+            </div>
+            <button onclick="document.getElementById('shade-matcher').scrollIntoView({behavior: 'smooth'})" class="px-5 py-2.5 rounded-full bg-brand-deeprose hover:bg-brand-charcoal text-white text-xs font-bold tracking-wider uppercase transition-all shadow">
+              Encontrar Mi Dupe Exacto
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="community-reviews" class="py-20 bg-white border-y border-brand-rose/20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-brand-deeprose font-bold">Comunidad Transparente</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-brand-charcoal mt-1">Reseñas Reales & Swatches en Piel</h2>
+            <p class="text-gray-600 text-sm mt-1">Filtra por tu tipo de piel exacto y lee la experiencia de clientas verificadas.</p>
+          </div>
+          <button onclick="openReviewModal()" class="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-brand-charcoal text-white hover:bg-brand-deeprose transition-all text-xs font-semibold tracking-wider uppercase shadow-md shrink-0">
+            <i class="ph ph-pencil-simple-line text-base"></i> Escribir mi Reseña
+          </button>
+        </div>
+
+        <!-- Rating Summary Bar -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 bg-brand-cream/80 p-6 rounded-3xl border border-brand-rose/30 mb-8">
+          <div class="text-center md:border-r border-brand-rose/20 flex flex-col justify-center">
+            <span class="font-serif text-5xl font-extrabold text-brand-charcoal">4.9</span>
+            <div class="flex justify-center text-amber-400 my-1 text-sm">
+              <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
+            </div>
+            <span class="text-xs text-gray-500">Basado en 42,890 valoraciones</span>
+          </div>
+
+          <!-- Meters for criteria -->
+          <div class="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-white p-3.5 rounded-2xl border border-gray-100">
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Pigmentación</span>
+                <span class="text-brand-deeprose">99%</span>
+              </div>
+              <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-brand-deeprose h-full rounded-full" style="width: 99%"></div>
+              </div>
+              <p class="text-[10px] text-gray-400 mt-1">1 sola gota rinde ambas mejillas</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-2xl border border-gray-100">
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>Duración (Hold)</span>
+                <span class="text-brand-deeprose">96%</span>
+              </div>
+              <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-brand-deeprose h-full rounded-full" style="width: 96%"></div>
+              </div>
+              <p class="text-[10px] text-gray-400 mt-1">+10 horas sin desvanecerse</p>
+            </div>
+
+            <div class="bg-white p-3.5 rounded-2xl border border-gray-100">
+              <div class="flex justify-between text-xs font-semibold mb-1">
+                <span>No Transfiere</span>
+                <span class="text-brand-deeprose">94%</span>
+              </div>
+              <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                <div class="bg-brand-deeprose h-full rounded-full" style="width: 94%"></div>
+              </div>
+              <p class="text-[10px] text-gray-400 mt-1">Fija al secar sin dejar residuo</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Buttons Bar -->
+        <div class="flex flex-wrap items-center gap-2 pb-6 border-b border-gray-100 mb-8 text-xs">
+          <span class="font-bold text-gray-700 mr-2 flex items-center gap-1"><i class="ph ph-funnel"></i> Filtrar por:</span>
+          
+          <button onclick="filterReviews('all')" class="review-filter-btn active px-3.5 py-1.5 rounded-full bg-brand-charcoal text-white font-medium transition-all" data-type="all">Todos (24)</button>
+          <button onclick="filterReviews('grasa')" class="review-filter-btn px-3.5 py-1.5 rounded-full bg-gray-100 hover:bg-brand-blush text-gray-700 font-medium transition-all" data-type="grasa">Piel Grasa / Mixta</button>
+          <button onclick="filterReviews('seca')" class="review-filter-btn px-3.5 py-1.5 rounded-full bg-gray-100 hover:bg-brand-blush text-gray-700 font-medium transition-all" data-type="seca">Piel Seca</button>
+          <button onclick="filterReviews('sensible')" class="review-filter-btn px-3.5 py-1.5 rounded-full bg-gray-100 hover:bg-brand-blush text-gray-700 font-medium transition-all" data-type="sensible">Piel Sensible / Con Textura</button>
+          <button onclick="filterReviews('con-foto')" class="review-filter-btn px-3.5 py-1.5 rounded-full bg-gray-100 hover:bg-brand-blush text-gray-700 font-medium transition-all" data-type="con-foto">📷 Con Swatch Real</button>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="reviews-card-container">
+          <!-- Dynamically populated or rich pre-rendered review cards -->
+        </div>
+
+      </div>
+    </section>
+
+    <section id="guarantee" class="py-20 bg-brand-cream relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Trust Pillars -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          <div class="bg-white p-6 rounded-2xl border border-brand-rose/20 text-center space-y-2">
+            <div class="w-12 h-12 mx-auto rounded-full bg-pink-100 text-brand-deeprose flex items-center justify-center text-2xl">
+              🐰
+            </div>
+            <h4 class="font-bold text-gray-900 text-sm">Leaping Bunny Certified</h4>
+            <p class="text-xs text-gray-500">Nunca testeamos en animales, ni ahora ni nunca.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-brand-rose/20 text-center space-y-2">
+            <div class="w-12 h-12 mx-auto rounded-full bg-amber-100 text-brand-darkgold flex items-center justify-center text-2xl">
+              🧪
+            </div>
+            <h4 class="font-bold text-gray-900 text-sm">Dermatológicamente Probado</h4>
+            <p class="text-xs text-gray-500">Fórmulas no comedogénicas, aptas para piel reactiva.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-brand-rose/20 text-center space-y-2">
+            <div class="w-12 h-12 mx-auto rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl">
+              🔄
+            </div>
+            <h4 class="font-bold text-gray-900 text-sm">Garantía Shade Match</h4>
+            <p class="text-xs text-gray-500">¿No fue tu tono? Te asistimos con cambio o crédito fácil.</p>
+          </div>
+          <div class="bg-white p-6 rounded-2xl border border-brand-rose/20 text-center space-y-2">
+            <div class="w-12 h-12 mx-auto rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-2xl">
+              ✨
+            </div>
+            <h4 class="font-bold text-gray-900 text-sm">Pigmentos Puros Micronizados</h4>
+            <p class="text-xs text-gray-500">Se difumina sin esfuerzo con dedos, brocha o esponja.</p>
+          </div>
+        </div>
+
+        <!-- Accordion FAQ -->
+        <div class="max-w-3xl mx-auto">
+          <div class="text-center mb-10">
+            <h3 class="font-serif text-2xl sm:text-3xl font-bold text-brand-charcoal">Preguntas Frecuentes para Comprar Segura</h3>
+            <p class="text-xs text-gray-500 mt-1">Resolvemos las dudas más comunes de nuestras clientas.</p>
+          </div>
+
+          <div class="space-y-3" id="faq-accordion">
+            <!-- FAQ 1 -->
+            <div class="bg-white rounded-2xl border border-brand-rose/20 overflow-hidden">
+              <button onclick="toggleFaq(1)" class="w-full p-5 text-left font-bold text-xs sm:text-sm text-gray-800 flex justify-between items-center">
+                <span>¿Cómo evito que el rubor líquido Color Bloom levante mi base de maquillaje?</span>
+                <i class="ph ph-caret-down text-brand-deeprose text-lg transition-transform duration-300" id="faq-icon-1"></i>
+              </button>
+              <div id="faq-content-1" class="hidden px-5 pb-5 text-xs text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+                El secreto es aplicar 1 o 2 puntos directamente en el dorso de tu mano o con la esponjita integrada a toquecitos, y difuminar dando pequeños rebotes con una esponja húmeda o brocha densa. <strong>Nunca arrastres el producto</strong>; el sistema de rebote funde la fórmula con tu base sin moverla.
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="bg-white rounded-2xl border border-brand-rose/20 overflow-hidden">
+              <button onclick="toggleFaq(2)" class="w-full p-5 text-left font-bold text-xs sm:text-sm text-gray-800 flex justify-between items-center">
+                <span>¿El rubor líquido obstruye los poros en piel con tendencia a acné?</span>
+                <i class="ph ph-caret-down text-brand-deeprose text-lg transition-transform duration-300" id="faq-icon-2"></i>
+              </button>
+              <div id="faq-content-2" class="hidden px-5 pb-5 text-xs text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+                No. Nuestra formulación está enriquecida con ingredientes hidratantes ligeros sin aceites minerales pesados. Ha sido testada clínicamente como no comedogénica. Recomendamos siempre una correcta doble limpieza nocturna.
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="bg-white rounded-2xl border border-brand-rose/20 overflow-hidden">
+              <button onclick="toggleFaq(3)" class="w-full p-5 text-left font-bold text-xs sm:text-sm text-gray-800 flex justify-between items-center">
+                <span>¿Qué diferencia hay entre el acabado Matte y el Dewy?</span>
+                <i class="ph ph-caret-down text-brand-deeprose text-lg transition-transform duration-300" id="faq-icon-3"></i>
+              </button>
+              <div id="faq-content-3" class="hidden px-5 pb-5 text-xs text-gray-600 leading-relaxed border-t border-gray-100 pt-3">
+                El acabado <strong>Matte</strong> seca dejando un velo aterciopelado soft-focus ideal si buscas que no haya brillo extra (muy recomendado para piel mixta a grasa). El acabado <strong>Dewy</strong> aporta un reflejo jugoso tipo "glass skin" que rejuvenece e hidrata visualmente los pómulos.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-brand-charcoal text-white pt-16 pb-12 border-t border-brand-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-12 border-b border-white/10 text-xs">
+        <div>
+          <span class="font-serif text-2xl font-bold tracking-widest block mb-2">SHEGLAM</span>
+          <p class="text-gray-400 leading-relaxed">
+            Belleza accesible de clase mundial. Fórmulas premium, sin crueldad animal y diseñadas para empoderar a cada tono de piel en el mundo.
+          </p>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-brand-rose uppercase tracking-wider mb-4">Herramientas</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li><a href="#shade-matcher" class="hover:text-white transition-colors">Test de Subtono</a></li>
+            <li><a href="#simulator" class="hover:text-white transition-colors">Simulador de Textura</a></li>
+            <li><a href="#dupes" class="hover:text-white transition-colors">Tabla Comparativa Dupes</a></li>
+            <li><a href="#community-reviews" class="hover:text-white transition-colors">Fotos Reales de Swatches</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-brand-rose uppercase tracking-wider mb-4">Transparencia</h4>
+          <ul class="space-y-2 text-gray-300">
+            <li>Certificado Leaping Bunny</li>
+            <li>Guía de Ingredientes Limpios</li>
+            <li>Política de Devolución Segura</li>
+            <li>Comentarios 100% Verificados</li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold text-sm text-brand-rose uppercase tracking-wider mb-4">Únete al Beauty Club</h4>
+          <p class="text-gray-400 mb-3">Recibe tips de aplicación y acceso anticipado a nuevos tonos virales.</p>
+          <div class="flex gap-2">
+            <input type="email" placeholder="Tu correo electrónico" class="bg-white/10 border border-white/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-rose w-full">
+            <button onclick="handleSubscribe()" class="bg-brand-rose hover:bg-brand-deeprose px-4 py-2 rounded-xl font-bold text-brand-charcoal text-xs transition-colors">
+              Unirme
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500">
+        <p>© 2026 SHEGLAM Trust & Beauty Experience Hub. Todos los derechos reservados.</p>
+        <div class="flex gap-4 mt-4 sm:mt-0">
+          <span>Términos y Privacidad</span>
+          <span>Soporte de Tono 24/7</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
+    <div id="cart-backdrop" onclick="toggleCartDrawer(false)" class="absolute inset-0 bg-black/50 backdrop-blur-xs transition-opacity"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div id="cart-panel" class="w-screen max-w-md bg-white shadow-2xl p-6 flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out pointer-events-auto">
+        <div>
+          <div class="flex items-center justify-between pb-4 border-b border-gray-100">
+            <div class="flex items-center gap-2">
+              <i class="ph ph-shopping-bag text-2xl text-brand-deeprose"></i>
+              <h3 class="font-serif text-lg font-bold text-gray-900">Bolsa de Belleza</h3>
+            </div>
+            <button onclick="toggleCartDrawer(false)" class="p-2 text-gray-400 hover:text-gray-700 rounded-full hover:bg-gray-100">
+              <i class="ph ph-x text-lg"></i>
+            </button>
+          </div>
+
+          <!-- Free Shipping Tracker -->
+          <div class="my-4 p-3 bg-brand-blush/40 rounded-xl border border-brand-rose/20 text-xs">
+            <div class="flex justify-between font-semibold text-gray-700 mb-1">
+              <span id="shipping-text">¡Agrega $15.00 más para Envío Gratis!</span>
+              <span id="shipping-percent">0%</span>
+            </div>
+            <div class="w-full bg-white h-2 rounded-full overflow-hidden border border-brand-rose/20">
+              <div id="shipping-progress" class="bg-brand-deeprose h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <!-- Cart items list -->
+          <div id="cart-items-list" class="divide-y divide-gray-100 max-h-80 overflow-y-auto space-y-2 py-2">
+            <!-- Items injected by JS -->
+            <p id="empty-cart-msg" class="text-xs text-center text-gray-400 py-10">Tu bolsa está vacía actualmente.</p>
+          </div>
+        </div>
+
+        <!-- Checkout summary -->
+        <div class="border-t border-gray-100 pt-4 space-y-3">
+          <div class="flex justify-between text-xs text-gray-600">
+            <span>Subtotal</span>
+            <span id="cart-subtotal" class="font-bold text-gray-900">$0.00</span>
+          </div>
+          <div class="flex justify-between text-xs text-gray-600">
+            <span>Garantía de Satisfacción Tono</span>
+            <span class="text-emerald-600 font-semibold">GRATIS</span>
+          </div>
+          <div class="flex justify-between text-base font-bold text-gray-900 pt-2 border-t border-gray-100">
+            <span>Total Estimado</span>
+            <span id="cart-total" class="text-brand-deeprose">$0.00</span>
+          </div>
+          <button onclick="handleCheckoutDemo()" class="w-full py-3.5 rounded-full bg-brand-deeprose hover:bg-brand-charcoal text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2">
+            <i class="ph ph-lock-key"></i> Proceder al Pago Seguro
+          </button>
+          <p class="text-[10px] text-center text-gray-400">Checkout cifrado SSL de 256 bits | Envíos rastreados</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="review-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-brand-rose/20 max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+        <div>
+          <h3 class="font-serif text-xl font-bold text-gray-900">Escribir Reseña Comunitaria</h3>
+          <p class="text-xs text-gray-500">Ayuda a miles de compradoras con tu experiencia real.</p>
+        </div>
+        <button onclick="closeReviewModal()" class="text-gray-400 hover:text-gray-700 text-lg p-1.5">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+
+      <form id="review-form" onsubmit="handleReviewSubmit(event)" class="space-y-4 mt-4 text-xs">
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Tu Nombre o Alias</label>
+          <input type="text" id="rev-name" required placeholder="Ej. Camila M." class="w-full p-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-deeprose">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Tipo de Piel</label>
+            <select id="rev-skintype" class="w-full p-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-deeprose bg-white">
+              <option value="grasa">Piel Grasa / Mixta</option>
+              <option value="seca">Piel Seca</option>
+              <option value="sensible">Piel Sensible</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Tono Usado</label>
+            <select id="rev-shade" class="w-full p-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-deeprose bg-white">
+              <option value="Love Cake">Love Cake (Rosa Neutro)</option>
+              <option value="Birthday Suit">Birthday Suit (Nude Cálido)</option>
+              <option value="Rose Ritual">Rose Ritual (Baya Elegante)</option>
+              <option value="Float On">Float On (Melocotón)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Calificación General</label>
+          <div class="flex items-center gap-1 text-2xl text-amber-400 cursor-pointer" id="rating-stars-picker">
+            <i class="ph-fill ph-star" onclick="setFormStars(1)"></i>
+            <i class="ph-fill ph-star" onclick="setFormStars(2)"></i>
+            <i class="ph-fill ph-star" onclick="setFormStars(3)"></i>
+            <i class="ph-fill ph-star" onclick="setFormStars(4)"></i>
+            <i class="ph-fill ph-star" onclick="setFormStars(5)"></i>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Tu Experiencia Honesta</label>
+          <textarea id="rev-comment" rows="3" required placeholder="¿Cómo sentiste la textura? ¿Cuánto tiempo te duró?..." class="w-full p-2.5 rounded-xl border border-gray-200 focus:outline-none focus:border-brand-deeprose"></textarea>
+        </div>
+
+        <!-- Fake photo swatch uploader -->
+        <div class="p-3 bg-brand-cream rounded-xl border border-dashed border-brand-rose text-center cursor-pointer hover:bg-brand-blush/40 transition-colors" onclick="simulatePhotoUpload()">
+          <i class="ph ph-camera text-2xl text-brand-deeprose block mb-1"></i>
+          <span id="photo-upload-label" class="font-semibold text-gray-700 block">Subir foto de swatch en tu brazo/rostro (Opcional)</span>
+          <span class="text-[10px] text-gray-400">Genera badge de "Swatch Verificado"</span>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-full bg-brand-deeprose text-white font-bold uppercase tracking-wider text-xs hover:bg-brand-charcoal transition-all shadow">
+          Publicar Reseña Verificada
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="undertone-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-brand-rose/20">
+      <div class="flex justify-between items-center pb-3 border-b border-gray-100">
+        <h3 class="font-serif text-lg font-bold text-gray-900">Guía: ¿Cuál es mi subtono?</h3>
+        <button onclick="closeUndertoneHelperModal()" class="text-gray-400 hover:text-gray-700 text-lg">
+          <i class="ph ph-x"></i>
+        </button>
+      </div>
+      <div class="mt-4 space-y-4 text-xs text-gray-600">
+        <div class="p-3 bg-amber-50 rounded-xl border border-amber-200">
+          <h5 class="font-bold text-amber-900 mb-1 flex items-center gap-1.5"><i class="ph-fill ph-sun"></i> Subtono Cálido (Warm)</h5>
+          <p>Tus venas de la muñeca se ven verdosas u oliváceas. Te favorece más la joyería dorada y tiendes a broncearte fácilmente bajo el sol.</p>
+        </div>
+        <div class="p-3 bg-rose-50 rounded-xl border border-rose-200">
+          <h5 class="font-bold text-rose-900 mb-1 flex items-center gap-1.5"><i class="ph-fill ph-drop"></i> Subtono Frío (Cool)</h5>
+          <p>Tus venas se aprecian azuladas o moradas. Te favorecen las joyas de plata y tiendes a quemarte o ponerte roja rápidamente al sol.</p>
+        </div>
+        <div class="p-3 bg-purple-50 rounded-xl border border-purple-200">
+          <h5 class="font-bold text-purple-900 mb-1 flex items-center gap-1.5"><i class="ph-fill ph-scales"></i> Subtono Neutro (Neutral)</h5>
+          <p>Tus venas tienen una mezcla difícil de distinguir entre azul y verde. Te quedan igual de bien tanto el oro como la plata.</p>
+        </div>
+      </div>
+      <button onclick="closeUndertoneHelperModal()" class="w-full mt-5 py-2.5 rounded-full bg-brand-charcoal text-white font-bold text-xs">
+        Entendido, seleccionar mi tono
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* Global Application State */
+    const state = {
+      cart: [],
+      selectedDepth: 'fair',
+      selectedDepthColor: '#FCEEE7',
+      selectedDepthName: 'Fair / Muy Claro',
+      selectedUndertone: 'neutral',
+      selectedUndertoneName: 'Neutro (Balanceado)',
+      selectedCategory: 'blush',
+      simFinish: 'dewy',
+      simIntensity: 2,
+      formStars: 5,
+      hasPhotoUpload: false,
+      comparisonSplit: 50
+    };
+
+    /* Comprehensive shade matcher matrix for SHEGLAM virals */
+    const matcherDatabase = {
+      blush: {
+        fair: {
+          neutral: { name: 'Color Bloom Blush - Love Cake', color: '#ED929C', price: 4.99, why: 'Rosa suave neutro que ilumina pieles de porcelana sin verse sobrecargado.' },
+          warm: { name: 'Color Bloom Blush - Float On', color: '#E87D65', price: 4.99, why: 'Tono durazno que resalta el resplandor natural cálido de tu piel.' },
+          cool: { name: 'Color Bloom Blush - Petal Talk', color: '#F08EA9', price: 4.99, why: 'Rosa pastel frío que brinda efecto muñeca instantáneo.' }
+        },
+        light: {
+          neutral: { name: 'Color Bloom Blush - Birthday Suit', color: '#D98980', price: 4.99, why: 'Un nude tostado perfecto para esculpir y dar rubor de apariencia natural.' },
+          warm: { name: 'Color Bloom Blush - Love Cake', color: '#ED929C', price: 4.99, why: 'Añade juventud y vitalidad a pieles claras con matiz dorado.' },
+          cool: { name: 'Color Bloom Blush - Rose Ritual', color: '#BE5A68', price: 4.99, why: 'Rosa profundo que armoniza con los reflejos rosados naturales.' }
+        },
+        medium: {
+          neutral: { name: 'Color Bloom Blush - Rose Ritual', color: '#BE5A68', price: 4.99, why: 'Pigmento balanceado que resalta en pieles trigueñas y medias.' },
+          warm: { name: 'Color Bloom Blush - Risky Business', color: '#B34B38', price: 4.99, why: 'Terracota cálido intenso que imita un atardecer dorado en el rostro.' },
+          cool: { name: 'Color Bloom Blush - Night Drive', color: '#A53856', price: 4.99, why: 'Ciruela frío sofisticado de altísimo impacto visual.' }
+        },
+        tan: {
+          neutral: { name: 'Color Bloom Blush - Risky Business', color: '#B34B38', price: 4.99, why: 'Aporta calidez estructurada sin lucir cenizo ni opaco.' },
+          warm: { name: 'Color Bloom Blush - Hot Chili', color: '#C83A2A', price: 4.99, why: 'Rojo cálido vibrante que despierta el tono bronceado de forma espectacular.' },
+          cool: { name: 'Color Bloom Blush - Berry Season', color: '#882A45', price: 4.99, why: 'Frambuesa intenso que contrasta con máxima elegancia.' }
+        },
+        deep: {
+          neutral: { name: 'Color Bloom Blush - Berry Season', color: '#882A45', price: 4.99, why: 'Fórmula ultra saturada que se aprecia nítida y vibrante en piel morena oscura.' },
+          warm: { name: 'Color Bloom Blush - Hot Chili', color: '#C83A2A', price: 4.99, why: 'Terracota carmesí que entrega un resplandor cálido sin perderse en la piel.' },
+          cool: { name: 'Color Bloom Blush - Night Drive', color: '#A53856', price: 4.99, why: 'Vino frío con fondo azulado que luce regio y sofisticado.' }
+        }
+      },
+      foundation: {
+        fair: {
+          neutral: { name: 'Skinfinite Foundation - Porcelain (101)', color: '#F7E7DD', price: 8.49, why: 'Fórmula que unifica sin efecto máscara ni subtonos amarillentos falsos.' },
+          warm: { name: 'Skinfinite Foundation - Warm Ivory (102)', color: '#F8E4CE', price: 8.49, why: 'Pigmento amarillo suave que anula manchas rojizas leves.' },
+          cool: { name: 'Skinfinite Foundation - Shell (100)', color: '#FCE6DE', price: 8.49, why: 'Base equilibrada con reflejo rosado saludable.' }
+        },
+        light: {
+          neutral: { name: 'Skinfinite Foundation - Nude (105)', color: '#ECD0B7', price: 8.49, why: 'Fusión exacta con tez clara estándar; acabado aterciopelado.' },
+          warm: { name: 'Skinfinite Foundation - Golden Light (106)', color: '#E9C7A4', price: 8.49, why: 'Realza el bronceado sutil y aporta luz continua.' },
+          cool: { name: 'Skinfinite Foundation - Petal Beige (104)', color: '#EBCBBF', price: 8.49, why: 'Corrige la tez apagada con luminosidad natural.' }
+        },
+        medium: {
+          neutral: { name: 'Skinfinite Foundation - Honey (202)', color: '#D4A47E', price: 8.49, why: 'El tono medio más vendido para evitar el efecto grisáceo.' },
+          warm: { name: 'Skinfinite Foundation - Warm Sand (204)', color: '#CB9868', price: 8.49, why: 'Subtono dorado perfecto para pieles latinas y mediterráneas.' },
+          cool: { name: 'Skinfinite Foundation - Cool Tan (201)', color: '#C99882', price: 8.49, why: 'Evita la oxidación no deseada a lo largo del día.' }
+        },
+        tan: {
+          neutral: { name: 'Skinfinite Foundation - Caramel (301)', color: '#A86F46', price: 8.49, why: 'Cobertura impecable con micropigmentos minerales.' },
+          warm: { name: 'Skinfinite Foundation - Warm Almond (303)', color: '#9E6539', price: 8.49, why: 'Matiz bronceado radiante sin sensación pesada.' },
+          cool: { name: 'Skinfinite Foundation - Amber (302)', color: '#9D6246', price: 8.49, why: 'Estructura el contorno con máxima naturalidad.' }
+        },
+        deep: {
+          neutral: { name: 'Skinfinite Foundation - Espresso (402)', color: '#573322', price: 8.49, why: 'Formulado para no dejar velo blanco (cero flashback en fotos flash).' },
+          warm: { name: 'Skinfinite Foundation - Rich Cocoa (404)', color: '#522F1E', price: 8.49, why: 'Aporta riqueza profunda con ingredientes humectantes.' },
+          cool: { name: 'Skinfinite Foundation - Ebony (401)', color: '#442318', price: 8.49, why: 'Pigmentación uniforme para tez muy profunda.' }
+        }
+      },
+      lip: {
+        fair: {
+          neutral: { name: 'Plump Lip Balm - Pink Flamingo', color: '#E47B89', price: 3.99, why: 'Labio mordido hidratado con brillo espejo no pegajoso.' },
+          warm: { name: 'Plump Lip Balm - Sepia Kiss', color: '#C27361', price: 3.99, why: 'Calidez melocotón sutil que complementa tu sonrisa.' },
+          cool: { name: 'Plump Lip Balm - Bubblegum Glow', color: '#E56D9B', price: 3.99, why: 'Rosa frío vibrante que hace ver los dientes más blancos.' }
+        },
+        light: {
+          neutral: { name: 'Plump Lip Balm - In Bloom', color: '#CE6C7B', price: 3.99, why: 'Nude clásico que resalta el grosor natural del labio.' },
+          warm: { name: 'Plump Lip Balm - Cinnamon Swirl', color: '#B86851', price: 3.99, why: 'Canela cálido perfecto para el uso cotidiano.' },
+          cool: { name: 'Plump Lip Balm - Rose Quartz', color: '#BE5E7E', price: 3.99, why: 'Efecto volumen con reflejos nacarados.' }
+        },
+        medium: {
+          neutral: { name: 'Plump Lip Balm - Walk on the Beach', color: '#AA5E53', price: 3.99, why: 'Labio definido sin resecar ni marcar líneas finas.' },
+          warm: { name: 'Plump Lip Balm - Toffee Treat', color: '#9E5540', price: 3.99, why: 'Caramelo tostado con péptidos voluminizadores.' },
+          cool: { name: 'Plump Lip Balm - Wild Berry', color: '#974561', price: 3.99, why: 'Baya jugosa con nutrición de manteca de karité.' }
+        },
+        tan: {
+          neutral: { name: 'Plump Lip Balm - Hot Cocoa', color: '#7E4337', price: 3.99, why: 'Chocolate cremoso que no desaparece en labios pigmentados.' },
+          warm: { name: 'Plump Lip Balm - Spiced Chai', color: '#88432F', price: 3.99, why: 'Tono especiado que potencia la luz del rostro.' },
+          cool: { name: 'Plump Lip Balm - Mulberry Glaze', color: '#722E46', price: 3.99, why: 'Profundidad elegante para eventos o diario.' }
+        },
+        deep: {
+          neutral: { name: 'Plump Lip Balm - Dark Espresso', color: '#4D2922', price: 3.99, why: 'Glosy café intenso con altísima retención de hidratación.' },
+          warm: { name: 'Plump Lip Balm - Mahogany Shine', color: '#562B21', price: 3.99, why: 'Lustre de lujo sin sensación grasosa.' },
+          cool: { name: 'Plump Lip Balm - Black Cherry', color: '#461E2E', price: 3.99, why: 'Cereza oscura con destellos multidimensionales.' }
+        }
+      }
+    };
+
+    /* Verified Community Reviews Store */
+    const reviewsData = [
+      {
+        id: 1,
+        author: 'Valeria R.',
+        type: 'grasa',
+        skinTone: 'Fair - Neutro',
+        shade: 'Love Cake',
+        stars: 5,
+        badge: 'Compra Verificada',
+        hasPhoto: true,
+        photoColor: '#ED929C',
+        text: '¡Es idéntico al rubor líquido de Selena Gomez pero por una cuarta parte del precio! Tengo piel mixta a grasa y no se me desvanece en todo el día. Con una gotita alcanza para las dos mejillas.',
+        wearTime: '11 horas',
+        date: 'Ayer'
+      },
+      {
+        id: 2,
+        author: 'Andrea S.',
+        type: 'seca',
+        skinTone: 'Medium - Cálido',
+        shade: 'Birthday Suit',
+        stars: 5,
+        badge: 'Compra Verificada',
+        hasPhoto: true,
+        photoColor: '#D98980',
+        text: 'Mi piel es súper seca y siempre le tenía miedo a los rubores que se cuartean. Este se siente como agüita fresca al ponerlo y deja un glow sano sin marcar pellejitos.',
+        wearTime: '9 horas',
+        date: 'Hace 3 días'
+      },
+      {
+        id: 3,
+        author: 'Mariana G.',
+        type: 'sensible',
+        skinTone: 'Light - Frío',
+        shade: 'Rose Ritual',
+        stars: 5,
+        badge: 'Compra Verificada',
+        hasPhoto: false,
+        text: 'Sufro de rosácea y este tono neutraliza perfecto la rojez sin irritarme. No me sacó granitos ni comedones. ¡El aplicador de esponjita es súper suave!',
+        wearTime: '12 horas',
+        date: 'Hace 5 días'
+      },
+      {
+        id: 4,
+        author: 'Daniela P.',
+        type: 'grasa',
+        skinTone: 'Tan - Neutro',
+        shade: 'Risky Business',
+        stars: 5,
+        badge: 'Top Reviewer',
+        hasPhoto: true,
+        photoColor: '#B34B38',
+        text: 'El acabado matte realmente no transfiere al cubrebocas ni al celular. Sellé con un polvo translúcido mínimo y me duró una fiesta entera de 8 horas bailando.',
+        wearTime: '10 horas',
+        date: 'Hace 1 semana'
+      },
+      {
+        id: 5,
+        author: 'Carla M.',
+        type: 'seca',
+        skinTone: 'Deep - Cálido',
+        shade: 'Hot Chili',
+        stars: 5,
+        badge: 'Compra Verificada',
+        hasPhoto: false,
+        text: 'Por fin un rubor con pigmento real que no queda cenizo en mi piel morena. El color se ve vivo, elegante y muy natural. Ya encargué dos tonos más.',
+        wearTime: '12 horas',
+        date: 'Hace 2 semanas'
+      }
+    ];
+
+    // Initializer
+    window.addEventListener('DOMContentLoaded', () => {
+      renderReviews(reviewsData);
+      updateMatcherResults();
+      setupSliderDrag();
+    });
+
+    // Hero Shade Switcher
+    function setHeroShade(name, color, finish) {
+      document.getElementById('hero-active-shade-name').innerText = name;
+      const blend = document.getElementById('hero-blush-blend');
+      blend.style.background = `radial-gradient(circle, ${color} 20%, transparent 80%)`;
+    }
+
+    // Shade Matcher Logic
+    function selectSkinDepth(depth, color, name) {
+      state.selectedDepth = depth;
+      state.selectedDepthColor = color;
+      state.selectedDepthName = name;
+
+      document.querySelectorAll('.skin-btn').forEach(btn => {
+        if(btn.dataset.depth === depth) {
+          btn.classList.add('border-brand-deeprose');
+          btn.classList.remove('border-transparent');
+        } else {
+          btn.classList.remove('border-brand-deeprose');
+          btn.classList.add('border-transparent');
+        }
+      });
+      updateMatcherResults();
+    }
+
+    function selectUndertone(undertone, name) {
+      state.selectedUndertone = undertone;
+      state.selectedUndertoneName = name;
+
+      document.querySelectorAll('.undertone-btn').forEach(btn => {
+        if(btn.dataset.undertone === undertone) {
+          btn.classList.add('border-brand-deeprose');
+          btn.classList.remove('border-transparent');
+        } else {
+          btn.classList.remove('border-brand-deeprose');
+          btn.classList.add('border-transparent');
+        }
+      });
+      updateMatcherResults();
+    }
+
+    function selectCategory(cat) {
+      state.selectedCategory = cat;
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if(btn.dataset.cat === cat) {
+          btn.classList.add('bg-brand-charcoal', 'text-white');
+          btn.classList.remove('bg-white', 'text-gray-700', 'border');
+        } else {
+          btn.classList.remove('bg-brand-charcoal', 'text-white');
+          btn.classList.add('bg-white', 'text-gray-700', 'border');
+        }
+      });
+      updateMatcherResults();
+    }
+
+    function updateMatcherResults() {
+      const match = matcherDatabase[state.selectedCategory][state.selectedDepth][state.selectedUndertone];
+      
+      // Update DOM
+      document.getElementById('matched-product-name').innerText = match.name;
+      document.getElementById('matcher-price').innerText = `$${match.price.toFixed(2)} USD`;
+      document.getElementById('matcher-reason').innerText = match.why;
+      
+      // Visual Arm Swatch Canvas Update
+      const canvas = document.getElementById('matcher-skin-canvas');
+      const drop = document.getElementById('matcher-drop-color');
+      const blend = document.getElementById('matcher-blend-color');
+      const legend = document.getElementById('matcher-canvas-legend');
+
+      canvas.style.backgroundColor = state.selectedDepthColor;
+      drop.style.backgroundColor = match.color;
+      blend.style.background = `radial-gradient(circle, ${match.color} 20%, transparent 80%)`;
+      legend.innerText = `Piel: ${state.selectedDepthName.split('/')[0].trim()} | Subtono: ${state.selectedUndertoneName.split('(')[0].trim()}`;
+    }
+
+    function addMatchedToCart() {
+      const match = matcherDatabase[state.selectedCategory][state.selectedDepth][state.selectedUndertone];
+      quickAddToCart(match.name, state.selectedUndertoneName.split('(')[0].trim(), match.price);
+    }
+
+    /* Comparison Before/After Slider Engine */
+    function setupSliderDrag() {
+      const slider = document.getElementById('slider-input');
+      const beforeLayer = document.getElementById('before-layer');
+      const handle = document.getElementById('slider-handle');
+
+      slider.addEventListener('input', (e) => {
+        const val = e.target.value;
+        beforeLayer.style.width = `${val}%`;
+        handle.style.left = `${val}%`;
+      });
+    }
+
+    function setComparisonMode(mode) {
+      const btnPores = document.getElementById('btn-comp-pores');
+      const btnBlush = document.getElementById('btn-comp-blush');
+      const afterTitle = document.getElementById('after-title');
+      const afterDesc = document.getElementById('after-desc');
+      const beforeTitle = document.getElementById('before-title');
+      const beforeDesc = document.getElementById('before-desc');
+
+      if (mode === 'pores') {
+        btnPores.className = "comp-btn active px-4 py-1.5 rounded-full text-xs font-bold bg-brand-deeprose text-white shadow-sm";
+        btnBlush.className = "comp-btn px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700 hover:bg-brand-blush";
+        afterTitle.innerText = "Piel Aterciopelada & Poros Suavizados";
+        afterDesc.innerText = "Fórmula Skinfinite: cobertura construible que no marca líneas de expresión.";
+        beforeTitle.innerText = "Tono Irregular & Textura Visible";
+        beforeDesc.innerText = "Brillos disparejos y poros dilatados al natural.";
+      } else {
+        btnBlush.className = "comp-btn active px-4 py-1.5 rounded-full text-xs font-bold bg-brand-deeprose text-white shadow-sm";
+        btnPores.className = "comp-btn px-4 py-1.5 rounded-full text-xs font-bold bg-gray-100 text-gray-700 hover:bg-brand-blush";
+        afterTitle.innerText = "Efecto Lifting & Pómulos Elevados";
+        afterDesc.innerText = "Color Bloom difuminado hacia las sienes para esculpir el contorno facial.";
+        beforeTitle.innerText = "Rostro Plano sin Dimensión";
+        beforeDesc.innerText = "Falta de rubor saludable y definición en la estructura ósea.";
+      }
+    }
+
+    /* Virtual Simulator Logic */
+    function setSimFinish(finish) {
+      state.simFinish = finish;
+      document.querySelectorAll('.finish-btn').forEach(btn => {
+        if(btn.dataset.finish === finish) {
+          btn.classList.add('border-brand-deeprose', 'bg-brand-blush/30');
+          btn.classList.remove('border-transparent', 'bg-gray-50');
+        } else {
+          btn.classList.remove('border-brand-deeprose', 'bg-brand-blush/30');
+          btn.classList.add('border-transparent', 'bg-gray-50');
+        }
+      });
+
+      const highlight = document.getElementById('sim-highlight');
+      const sparkles = document.getElementById('sim-sparkles');
+      const badge = document.getElementById('active-sim-badge');
+      const textureResult = document.getElementById('sim-texture-result');
+      const tip = document.getElementById('finish-tip');
+
+      if (finish === 'dewy') {
+        badge.innerText = 'Dewy Radiante';
+        textureResult.innerText = 'Efecto Hidratación Profunda con Reflejo de Luz Natural';
+        highlight.style.opacity = '0.65';
+        highlight.className = 'absolute inset-0 bg-gradient-to-tr from-transparent via-white/50 to-transparent transition-opacity duration-500';
+        sparkles.classList.add('hidden');
+        tip.innerHTML = '<strong>Consejo Pro Dewy:</strong> Ideal para piel seca a mixta. Aplica con esponja ligeramente humedecida para fundir con tu crema.';
+      } else if (finish === 'matte') {
+        badge.innerText = 'Matte Soft-Focus';
+        textureResult.innerText = 'Acabado Aterciopelado Anti-Brillo (Zero Transfer)';
+        highlight.style.opacity = '0.15';
+        sparkles.classList.add('hidden');
+        tip.innerHTML = '<strong>Consejo Pro Matte:</strong> Ideal para piel con tendencia a grasa o climas húmedos. Sella sin apelmazar el maquillaje.';
+      } else if (finish === 'glow') {
+        badge.innerText = 'Glow Microperlas';
+        textureResult.innerText = 'Destellos de Microperlas Reflectoras de Luz Tipo Cristal';
+        highlight.style.opacity = '0.85';
+        highlight.className = 'absolute inset-0 bg-gradient-to-tr from-amber-100/30 via-white/60 to-transparent transition-opacity duration-500';
+        sparkles.classList.remove('hidden');
+        tip.innerHTML = '<strong>Consejo Pro Glow:</strong> Aplícalo en el punto más alto del pómulo y puente de la nariz para un look de alfombra roja.';
+      }
+    }
+
+    function updateIntensity(val) {
+      state.simIntensity = parseInt(val);
+      const label = document.getElementById('intensity-label');
+      const patch = document.getElementById('sim-blush-patch');
+
+      if(val == 1) {
+        label.innerText = 'Sutil (1 gota)';
+        patch.style.opacity = '0.45';
+        patch.style.transform = 'scale(0.9)';
+      } else if(val == 2) {
+        label.innerText = 'Natural (2 gotas)';
+        patch.style.opacity = '0.75';
+        patch.style.transform = 'scale(1.1)';
+      } else {
+        label.innerText = 'Glam Intenso (3 gotas)';
+        patch.style.opacity = '0.95';
+        patch.style.transform = 'scale(1.3)';
+      }
+    }
+
+    /* Community Reviews Render & Filter */
+    function renderReviews(items) {
+      const container = document.getElementById('reviews-card-container');
+      container.innerHTML = '';
+
+      items.forEach(rev => {
+        const card = document.createElement('div');
+        card.className = "bg-white p-6 rounded-3xl border border-brand-rose/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between";
+        
+        // Build star icons string
+        let starsHtml = '';
+        for(let i=0; i<rev.stars; i++) starsHtml += '<i class="ph-fill ph-star text-amber-400"></i>';
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-full bg-brand-blush text-brand-deeprose font-bold flex items-center justify-center text-xs border border-brand-rose/30">
+                  ${rev.author.substring(0, 2)}
+                </div>
+                <div>
+                  <h4 class="font-bold text-xs text-gray-900">${rev.author}</h4>
+                  <span class="text-[10px] text-gray-400">${rev.date}</span>
+                </div>
+              </div>
+              <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full font-bold border border-emerald-200 flex items-center gap-1">
+                <i class="ph-fill ph-check-circle"></i> ${rev.badge}
+              </span>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-1.5 mb-3 text-[10px]">
+              <span class="bg-brand-nude text-gray-700 px-2 py-0.5 rounded-md font-semibold">Tono: ${rev.shade}</span>
+              <span class="bg-gray-100 text-gray-600 px-2 py-0.5 rounded-md">${rev.skinTone}</span>
+              <span class="bg-pink-50 text-brand-deeprose px-2 py-0.5 rounded-md font-medium">Duró: ${rev.wearTime}</span>
+            </div>
+
+            <div class="flex text-xs mb-2">
+              ${starsHtml}
+            </div>
+
+            <p class="text-xs text-gray-600 leading-relaxed">"${rev.text}"</p>
+          </div>
+
+          ${rev.hasPhoto ? `
+            <div class="mt-4 pt-3 border-t border-gray-100 flex items-center gap-3">
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center border border-black/10 shadow-inner relative overflow-hidden" style="background-color: #F8DFD4;">
+                <div class="w-7 h-7 rounded-full blur-xs opacity-90" style="background-color: ${rev.photoColor || '#ED929C'};"></div>
+              </div>
+              <div class="text-[11px]">
+                <span class="font-bold text-gray-800 block">Swatch Comunitario Verificado</span>
+                <span class="text-gray-400 text-[10px]">Luz solar natural sin filtros</span>
+              </div>
+            </div>
+          ` : `
+            <div class="mt-4 pt-2 border-t border-gray-100 text-[10px] text-gray-400 flex items-center gap-1">
+              <i class="ph-fill ph-shield-check text-emerald-600"></i> Verificado por algoritmo anti-fraude
+            </div>
+          `}
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterReviews(filter) {
+      document.querySelectorAll('.review-filter-btn').forEach(btn => {
+        if(btn.dataset.type === filter) {
+          btn.classList.add('bg-brand-charcoal', 'text-white');
+          btn.classList.remove('bg-gray-100', 'text-gray-700');
+        } else {
+          btn.classList.remove('bg-brand-charcoal', 'text-white');
+          btn.classList.add('bg-gray-100', 'text-gray-700');
+        }
+      });
+
+      if (filter === 'all') {
+        renderReviews(reviewsData);
+      } else if (filter === 'con-foto') {
+        renderReviews(reviewsData.filter(r => r.hasPhoto));
+      } else {
+        renderReviews(reviewsData.filter(r => r.type === filter));
+      }
+    }
+
+    /* Cart Operations */
+    function quickAddToCart(title, shade, price) {
+      state.cart.push({
+        id: Date.now() + Math.random(),
+        title,
+        shade,
+        price
+      });
+      updateCartDisplay();
+      toggleCartDrawer(true);
+    }
+
+    function removeCartItem(id) {
+      state.cart = state.cart.filter(item => item.id !== id);
+      updateCartDisplay();
+    }
+
+    function updateCartDisplay() {
+      const badge = document.getElementById('cart-badge');
+      const list = document.getElementById('cart-items-list');
+      const subtotalEl = document.getElementById('cart-subtotal');
+      const totalEl = document.getElementById('cart-total');
+      const emptyMsg = document.getElementById('empty-cart-msg');
+      const shippingProgress = document.getElementById('shipping-progress');
+      const shippingText = document.getElementById('shipping-text');
+      const shippingPercent = document.getElementById('shipping-percent');
+
+      badge.innerText = state.cart.length;
+
+      const subtotal = state.cart.reduce((sum, item) => sum + item.price, 0);
+      subtotalEl.innerText = `$${subtotal.toFixed(2)}`;
+      totalEl.innerText = `$${subtotal.toFixed(2)}`;
+
+      // Free shipping threshold ($15)
+      const threshold = 15.00;
+      if (subtotal >= threshold) {
+        shippingProgress.style.width = '100%';
+        shippingText.innerText = '¡Felicidades! Tienes ENVÍO GRATIS asegurado 🎉';
+        shippingPercent.innerText = '100%';
+      } else {
+        const remaining = (threshold - subtotal).toFixed(2);
+        const pct = Math.min(100, Math.round((subtotal / threshold) * 100));
+        shippingProgress.style.width = `${pct}%`;
+        shippingText.innerText = `Agrega $${remaining} más para Envío Gratis`;
+        shippingPercent.innerText = `${pct}%`;
+      }
+
+      if (state.cart.length === 0) {
+        list.innerHTML = '<p id="empty-cart-msg" class="text-xs text-center text-gray-400 py-10">Tu bolsa está vacía actualmente.</p>';
+      } else {
+        list.innerHTML = '';
+        state.cart.forEach(item => {
+          const row = document.createElement('div');
+          row.className = "py-3 flex items-center justify-between";
+          row.innerHTML = `
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-brand-blush flex items-center justify-center text-base">
+                💄
+              </div>
+              <div>
+                <h5 class="text-xs font-bold text-gray-900 leading-tight">${item.title}</h5>
+                <span class="text-[10px] text-gray-500">Tono: ${item.shade}</span>
+                <span class="text-xs font-bold text-brand-deeprose block">$${item.price.toFixed(2)}</span>
+              </div>
+            </div>
+            <button onclick="removeCartItem(${item.id})" class="text-gray-400 hover:text-rose-500 p-1">
+              <i class="ph ph-trash text-base"></i>
+            </button>
+          `;
+          list.appendChild(row);
+        });
+      }
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const panel = document.getElementById('cart-panel');
+      if (open) {
+        drawer.classList.remove('pointer-events-none', 'opacity-0');
+        drawer.classList.add('pointer-events-auto', 'opacity-100');
+        panel.classList.remove('translate-x-full');
+      } else {
+        drawer.classList.add('opacity-0', 'pointer-events-none');
+        drawer.classList.remove('opacity-100', 'pointer-events-auto');
+        panel.classList.add('translate-x-full');
+      }
+    }
+
+    document.getElementById('cart-toggle-btn').addEventListener('click', () => toggleCartDrawer(true));
+
+    /* Modal Reviews */
+    function openReviewModal() {
+      document.getElementById('review-modal').classList.remove('hidden');
+      document.getElementById('review-modal').classList.add('flex');
+    }
+
+    function closeReviewModal() {
+      document.getElementById('review-modal').classList.add('hidden');
+      document.getElementById('review-modal').classList.remove('flex');
+    }
+
+    function setFormStars(rating) {
+      state.formStars = rating;
+      const stars = document.getElementById('rating-stars-picker').children;
+      for(let i=0; i<5; i++) {
+        if(i < rating) {
+          stars[i].className = 'ph-fill ph-star';
+        } else {
+          stars[i].className = 'ph ph-star text-gray-300';
+        }
+      }
+    }
+
+    function simulatePhotoUpload() {
+      state.hasPhotoUpload = true;
+      document.getElementById('photo-upload-label').innerText = '✓ Foto cargada: swatch_brazo_luz_dia.jpg';
+      document.getElementById('photo-upload-label').classList.add('text-emerald-600');
+    }
+
+    function handleReviewSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('rev-name').value;
+      const type = document.getElementById('rev-skintype').value;
+      const shade = document.getElementById('rev-shade').value;
+      const comment = document.getElementById('rev-comment').value;
+
+      const newReview = {
+        id: Date.now(),
+        author: name,
+        type: type,
+        skinTone: type === 'grasa' ? 'Piel Mixta/Grasa' : 'Piel Equilibrada',
+        shade: shade,
+        stars: state.formStars,
+        badge: 'Compra Verificada',
+        hasPhoto: state.hasPhotoUpload,
+        photoColor: '#ED929C',
+        text: comment,
+        wearTime: '10 horas comprobadas',
+        date: 'Reciente'
+      };
+
+      reviewsData.unshift(newReview);
+      renderReviews(reviewsData);
+      closeReviewModal();
+      e.target.reset();
+      state.hasPhotoUpload = false;
+      document.getElementById('photo-upload-label').innerText = 'Subir foto de swatch en tu brazo/rostro (Opcional)';
+      document.getElementById('photo-upload-label').classList.remove('text-emerald-600');
+
+      showToastNotification('¡Gracias! Tu reseña y swatch han sido publicados con éxito.');
+    }
+
+    /* Modal Undertone Guide */
+    function openUndertoneHelperModal() {
+      document.getElementById('undertone-modal').classList.remove('hidden');
+      document.getElementById('undertone-modal').classList.add('flex');
+    }
+
+    function closeUndertoneHelperModal() {
+      document.getElementById('undertone-modal').classList.add('hidden');
+      document.getElementById('undertone-modal').classList.remove('flex');
+    }
+
+    /* FAQ Accordion */
+    function toggleFaq(num) {
+      const content = document.getElementById(`faq-content-${num}`);
+      const icon = document.getElementById(`faq-icon-${num}`);
+      if (content.classList.contains('hidden')) {
+        content.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        content.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    function handleSubscribe() {
+      showToastNotification('¡Bienvenida al Beauty Club SHEGLAM! Revisa tu bandeja de entrada.');
+    }
+
+    function handleCheckoutDemo() {
+      if(state.cart.length === 0) {
+        showToastNotification('Tu bolsa está vacía. Selecciona un tono primero.');
+        return;
+      }
+      showToastNotification('Redirigiendo a pasarela segura de pago con Garantía de Tono...');
+    }
+
+    /* Toast notification helper without alert() */
+    function showToastNotification(message) {
+      const existingToast = document.getElementById('sheglam-toast');
+      if (existingToast) existingToast.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'sheglam-toast';
+      toast.className = 'fixed bottom-5 right-5 z-50 bg-brand-charcoal text-white text-xs px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-brand-rose/40 animate-bounce';
+      toast.innerHTML = `
+        <i class="ph-fill ph-check-circle text-brand-rose text-lg"></i>
+        <span>${message}</span>
+      `;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.remove('animate-bounce');
+        toast.style.transition = 'opacity 0.5s ease';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500);
+      }, 3500);
+    }
+  </script>
 </body>
 </html>
