@@ -106,20 +106,53 @@
   </header>
 
   <main>
+    <!-- Buscador Libre de Productos SHEGLAM (Flujo desde SHEIN) -->
+    <section class="bg-white border-b border-brand-rose/20 py-5 shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-brand-blush/35 p-4 rounded-2xl border border-brand-rose/30">
+          <div class="flex items-center gap-3 text-left">
+            <div class="w-10 h-10 rounded-xl bg-brand-deeprose text-white flex items-center justify-center shrink-0 shadow-sm">
+              <i class="ph-bold ph-magnifying-glass text-lg"></i>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-brand-deeprose block">Buscador Inteligente SHEIN × SHEGLAM</span>
+              <p class="text-xs sm:text-sm font-bold text-brand-charcoal">Escribe el maquillaje que quieres analizar antes de comprar:</p>
+            </div>
+          </div>
+
+          <form onsubmit="handleCustomProductSearch(event)" class="flex flex-wrap sm:flex-nowrap items-center gap-2 w-full md:w-auto">
+            <div class="relative w-full sm:w-80">
+              <input type="text" 
+                     id="sheglam-search-input" 
+                     placeholder="Ej. Corrector, Rímel, Rubor, Base, Labial..." 
+                     class="w-full bg-white border border-brand-rose/40 text-brand-charcoal text-xs font-semibold rounded-xl pl-3.5 pr-8 py-2.5 focus:outline-none focus:border-brand-deeprose shadow-xs" />
+              <i class="ph ph-sparkle text-brand-deeprose absolute right-3 top-1/2 -translate-y-1/2"></i>
+            </div>
+            <button type="submit" class="w-full sm:w-auto whitespace-nowrap px-4 py-2.5 rounded-xl bg-brand-deeprose hover:bg-brand-charcoal text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+              <i class="ph-bold ph-magnifying-glass"></i> Analizar Producto
+            </button>
+            <button type="button" onclick="openConfirmSheinModal()" class="w-full sm:w-auto whitespace-nowrap px-4 py-2.5 rounded-xl bg-brand-charcoal hover:bg-brand-deeprose text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm">
+              <i class="ph-bold ph-check-circle"></i> ¡Estoy Segura!
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <!-- Sección de Bienvenida / Presentación -->
-    <section class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-brand-nude/40 via-brand-blush/20 to-transparent">
+    <section class="relative overflow-hidden py-14 lg:py-20 bg-gradient-to-b from-brand-nude/40 via-brand-blush/20 to-transparent">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-blush border border-brand-rose/40 text-xs font-semibold text-brand-deeprose">
-              <i class="ph ph-sparkle text-base"></i> Encuentra tu tono, descubre tu brillo
+              <i class="ph ph-sparkle text-base"></i> Tu Asistente de Seguridad antes de Comprar en SHEIN
             </div>
             <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-brand-charcoal font-bold leading-tight">
-              Explora y compara: <span class="italic font-normal gold-gradient-text">mira cómo luce en tu piel</span> antes de decidir.
+              Asegura tu compra: <span class="italic font-normal gold-gradient-text">comprueba tu producto SHEGLAM</span> antes de pedirlo.
             </h1>
             <p class="text-base sm:text-lg text-gray-600 max-w-xl mx-auto lg:mx-0 font-light leading-relaxed">
-              La plataforma comunitaria informativa de <strong>LUMÉRA Beauty</strong> donde puedes consultar muestras reales clasificadas por subtono, simular acabados de textura y leer opiniones 100% transparentes.
+              ¿Viste un producto viral de <strong>SHEGLAM en SHEIN</strong> pero dudas del tono o acabado? En <strong>LUMÉRA Beauty</strong> lo analizas en tu tipo de piel, lees opiniones reales y confirmas tu elección sin miedo a equivocarte.
             </p>
 
             <!-- Barra de métricas e indicadores de confianza -->
@@ -152,20 +185,26 @@
           <div class="lg:col-span-5 relative">
             <div class="relative mx-auto max-w-md bg-white p-6 rounded-3xl shadow-xl border border-brand-blush">
               <div class="absolute -top-3 -right-3 bg-brand-gold text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-md">
-                RECOMENDACIÓN DESTACADA
+                EN VERIFICACIÓN SHEIN
               </div>
               <div class="flex items-center gap-4 mb-4">
-                <div class="w-14 h-14 rounded-2xl bg-brand-blush flex items-center justify-center text-3xl">
+                <div id="hero-product-icon" class="w-14 h-14 rounded-2xl bg-brand-blush flex items-center justify-center text-3xl">
                   🌸
                 </div>
                 <div>
-                  <h3 class="font-bold text-gray-900 leading-tight">Rubor Líquido Color Bloom</h3>
+                  <h3 id="hero-product-title" class="font-bold text-gray-900 leading-tight">Rubor Líquido Color Bloom</h3>
                   <p class="text-xs text-gray-500">Tono en pantalla: <span id="hero-active-shade-name" class="font-semibold text-brand-deeprose">Love Cake</span></p>
                   <div class="flex items-center gap-1 text-amber-400 text-xs mt-0.5">
                     <i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i><i class="ph-fill ph-star"></i>
-                    <span class="text-gray-500 text-[11px] ml-1">(42,890 valoraciones)</span>
+                    <span id="hero-product-reviews" class="text-gray-500 text-[11px] ml-1">(42,890 valoraciones)</span>
                   </div>
                 </div>
+              </div>
+
+              <!-- Veredicto rápido de la comunidad -->
+              <div id="hero-product-verdict" class="mb-3 px-3 py-2 rounded-xl bg-emerald-50/80 border border-emerald-200 text-[11px] text-emerald-800 flex items-center gap-2">
+                <i class="ph-fill ph-seal-check text-emerald-600 text-base shrink-0"></i>
+                <span><strong>Veredicto LUMÉRA:</strong> Altamente recomendado; no levanta la base y se difumina fácil.</span>
               </div>
 
               <!-- Vista previa interactiva de muestras -->
@@ -173,11 +212,11 @@
                 <p class="text-xs text-gray-600 mb-2 font-medium">Previsualización en piel Neutra / Clara:</p>
                 <div id="hero-swatch-display" class="h-28 rounded-xl flex items-center justify-center transition-all duration-500 relative overflow-hidden shadow-inner" style="background-color: #F8DFD4;">
                   <div id="hero-blush-blend" class="w-32 h-20 rounded-full blur-md opacity-85 transition-all duration-500 transform rotate-12" style="background: radial-gradient(circle, #ED929C 20%, transparent 80%);"></div>
-                  <span class="absolute bottom-2 right-2 text-[10px] bg-white/80 backdrop-blur px-2 py-0.5 rounded text-gray-700 font-semibold">Acabado Mate Natural</span>
+                  <span id="hero-finish-tag" class="absolute bottom-2 right-2 text-[10px] bg-white/80 backdrop-blur px-2 py-0.5 rounded text-gray-700 font-semibold">Acabado Mate Natural</span>
                 </div>
 
                 <!-- Selector rápido de muestra en cabecera -->
-                <div class="flex items-center justify-center gap-2 mt-4">
+                <div id="hero-shades-buttons" class="flex items-center justify-center gap-2 mt-4">
                   <span class="text-[11px] text-gray-500">Cambiar tono:</span>
                   <button onclick="setHeroShade('Love Cake', '#ED929C', 'Mate Sedoso')" class="w-6 h-6 rounded-full border-2 border-white shadow hover:scale-110 transition-transform" style="background-color: #ED929C;" title="Love Cake"></button>
                   <button onclick="setHeroShade('Birthday Suit', '#D98980', 'Efecto Jugoso')" class="w-6 h-6 rounded-full border-2 border-white shadow hover:scale-110 transition-transform" style="background-color: #D98980;" title="Birthday Suit"></button>
@@ -186,11 +225,13 @@
                 </div>
               </div>
 
-              <!-- Pie informativo del producto (Sin Precios ni Carritos) -->
-              <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-                <span class="flex items-center gap-1 text-emerald-600 font-medium"><i class="ph-fill ph-check-circle"></i> Textura Ligera Modulable</span>
-                <button onclick="saveHeroShade()" class="bg-brand-rose/30 hover:bg-brand-deeprose hover:text-white text-brand-deeprose font-semibold px-4 py-1.5 rounded-lg transition-colors flex items-center gap-1">
-                  <i class="ph ph-bookmark"></i> Guardar Tono
+              <!-- Pie informativo del producto (Confirmación para SHEIN) -->
+              <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-2 text-xs text-gray-600">
+                <button onclick="saveHeroShade()" class="bg-brand-rose/25 hover:bg-brand-rose/40 text-brand-deeprose font-semibold px-3 py-2 rounded-xl transition-colors flex items-center gap-1">
+                  <i class="ph ph-bookmark"></i> Guardar
+                </button>
+                <button onclick="openConfirmSheinModal()" class="flex-1 bg-brand-deeprose hover:bg-brand-charcoal text-white font-bold px-4 py-2 rounded-xl transition-colors flex items-center justify-center gap-1.5 shadow-sm">
+                  <i class="ph-bold ph-check-circle"></i> ¡Me convence! Listo para SHEIN
                 </button>
               </div>
             </div>
@@ -826,32 +867,65 @@
     </div>
   </div>
 
-  <!-- Modal Mis Tonos Guardados -->
+  <!-- Modal de Tonos Guardados -->
   <div id="saved-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-brand-rose/20 max-h-[85vh] flex flex-col">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl border border-brand-rose/20 max-h-[85vh] flex flex-col">
       <div class="flex justify-between items-center pb-3 border-b border-gray-100">
-        <div class="flex items-center gap-2">
-          <i class="ph-fill ph-bookmark text-xl text-brand-deeprose"></i>
-          <div>
-            <h3 class="font-serif text-lg font-bold text-gray-900">Mis Tonos Guardados</h3>
-            <p class="text-[11px] text-gray-500">Tu lista personal de recomendaciones</p>
-          </div>
+        <div>
+          <h3 class="font-serif text-lg font-bold text-gray-900">Mis Tonos Guardados</h3>
+          <p class="text-xs text-gray-500">Tu selección personalizada de colores LUMÉRA.</p>
         </div>
-        <button onclick="closeSavedModal()" class="text-gray-400 hover:text-gray-700 text-lg p-1">
+        <button onclick="closeSavedModal()" class="text-gray-400 hover:text-gray-700 text-lg p-1.5">
           <i class="ph ph-x"></i>
         </button>
       </div>
 
-      <div id="saved-shades-list" class="my-4 space-y-3 overflow-y-auto flex-1 pr-1 text-xs">
-        <!-- Se llena dinámicamente con los tonos guardados -->
+      <div id="saved-shades-list" class="my-4 space-y-2.5 overflow-y-auto flex-1 text-xs">
+        <!-- Se llena dinámicamente -->
       </div>
 
-      <div class="pt-3 border-t border-gray-100 flex justify-between items-center">
-        <button onclick="clearSavedShades()" class="text-xs text-gray-400 hover:text-rose-600 font-medium transition-colors">
+      <div class="pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+        <button onclick="clearSavedShades()" class="text-xs text-gray-400 hover:text-rose-600 font-semibold transition-colors">
           Vaciar lista
         </button>
-        <button onclick="closeSavedModal()" class="px-5 py-2 rounded-full bg-brand-charcoal text-white font-bold text-xs hover:bg-brand-deeprose transition-colors">
+        <button onclick="closeSavedModal()" class="px-5 py-2 rounded-full bg-brand-charcoal text-white text-xs font-bold">
           Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Confirmación Final Pre-Compra SHEIN -->
+  <div id="confirm-shein-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-brand-rose/20 text-center">
+      <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto mb-3">
+        <i class="ph-fill ph-seal-check"></i>
+      </div>
+      <span class="text-[10px] font-bold uppercase tracking-widest text-brand-darkgold bg-brand-nude px-3 py-1 rounded-full">Verificación Completada</span>
+      <h3 class="font-serif text-2xl font-bold text-gray-900 mt-2">¡Tu elección está confirmada!</h3>
+      <p class="text-xs text-gray-600 mt-1">Ya tienes la seguridad de que este tono y fórmula armonizan con tu piel.</p>
+
+      <div class="my-5 p-4 rounded-2xl bg-brand-cream border border-brand-rose/30 text-left space-y-2 text-xs">
+        <div class="flex justify-between">
+          <span class="text-gray-500">Producto SHEGLAM:</span>
+          <span id="confirm-product-name" class="font-bold text-gray-900 text-right">Rubor Líquido Color Bloom</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500">Tono Confirmado:</span>
+          <span id="confirm-shade-name" class="font-bold text-brand-deeprose">Love Cake</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-500">Acabado / Compatibilidad:</span>
+          <span id="confirm-finish-name" class="font-semibold text-emerald-700">99.2% Aprobado</span>
+        </div>
+      </div>
+
+      <div class="space-y-2.5">
+        <button onclick="copyConfirmedDetails()" class="w-full py-3 rounded-full bg-brand-charcoal hover:bg-brand-deeprose text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md">
+          <i class="ph-bold ph-copy"></i> Copiar Nombre y Tono para Buscar en SHEIN
+        </button>
+        <button onclick="closeConfirmSheinModal()" class="w-full py-2.5 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold text-xs transition-colors">
+          Seguir explorando más opciones
         </button>
       </div>
     </div>
@@ -895,6 +969,7 @@
       selectedUndertone: 'neutral',
       selectedUndertoneName: 'Neutro (Balanceado)',
       selectedCategory: 'blush',
+      customProductTitle: 'Rubor Líquido Color Bloom',
       heroCurrentShade: { name: 'Love Cake', color: '#ED929C', finish: 'Mate Natural' },
       savedShades: [],
       simFinish: 'dewy',
@@ -902,88 +977,152 @@
       formStars: 5
     };
 
-    /* Matriz de recomendaciones LUMÉRA */
+    /* Base de datos completa de tonos y recomendaciones por nivel de piel y subtono */
     const matcherDatabase = {
       blush: {
         fair: {
+          warm: { name: 'Color Bloom Blush - Float On', color: '#E67B66', why: 'Melocotón suave que aporta calidez sin verse naranja.' },
           neutral: { name: 'Color Bloom Blush - Love Cake', color: '#ED929C', why: 'Rosa suave neutro que ilumina pieles de porcelana.' },
-          warm: { name: 'Color Bloom Blush - Float On', color: '#E87D65', why: 'Tono durazno que resalta el resplandor cálido de tu piel.' },
-          cool: { name: 'Color Bloom Blush - Petal Talk', color: '#F08EA9', why: 'Rosa pastel frío que brinda frescura instantánea.' }
+          cool: { name: 'Color Bloom Blush - Petal Talk', color: '#E885A4', why: 'Rosa frío pastel que armoniza con subtonos rosados.' }
         },
         light: {
-          neutral: { name: 'Color Bloom Blush - Birthday Suit', color: '#D98980', why: 'Nude tostado perfecto para rubor natural.' },
-          warm: { name: 'Color Bloom Blush - Love Cake', color: '#ED929C', why: 'Añade vitalidad a pieles claras con matiz dorado.' },
-          cool: { name: 'Color Bloom Blush - Rose Ritual', color: '#BE5A68', why: 'Rosa profundo que armoniza con los reflejos rosados.' }
+          warm: { name: 'Color Bloom Blush - Birthday Suit', color: '#D98980', why: 'Nude rosado cálido ideal para un rubor natural diario.' },
+          neutral: { name: 'Color Bloom Blush - Love Cake', color: '#ED929C', why: 'Equilibrio perfecto entre rosa fresco y suavidad.' },
+          cool: { name: 'Color Bloom Blush - Hush Hush', color: '#DF7A96', why: 'Tono baya ligero que realza pieles claras frías.' }
         },
         medium: {
-          neutral: { name: 'Color Bloom Blush - Rose Ritual', color: '#BE5A68', why: 'Pigmento balanceado que resalta en pieles medias.' },
-          warm: { name: 'Color Bloom Blush - Risky Business', color: '#B34B38', why: 'Terracota cálido que da un toque de atardecer.' },
-          cool: { name: 'Color Bloom Blush - Night Drive', color: '#A53856', why: 'Ciruela frío sofisticado de gran impacto.' }
+          warm: { name: 'Color Bloom Blush - Devoted', color: '#D66858', why: 'Coral terracota vibrante que resalta tonos medios dorados.' },
+          neutral: { name: 'Color Bloom Blush - Birthday Suit', color: '#D98980', why: 'Nude versátil que se funde con naturalidad en piel media.' },
+          cool: { name: 'Color Bloom Blush - Rose Ritual', color: '#BE5A68', why: 'Rosa malva profundo que aporta definición elegante.' }
         },
         tan: {
-          neutral: { name: 'Color Bloom Blush - Risky Business', color: '#B34B38', why: 'Aporta calidez estructurada sin lucir cenizo.' },
-          warm: { name: 'Color Bloom Blush - Hot Chili', color: '#C83A2A', why: 'Rojo cálido vibrante que despierta el tono bronceado.' },
-          cool: { name: 'Color Bloom Blush - Berry Season', color: '#882A45', why: 'Frambuesa intenso que contrasta con elegancia.' }
+          warm: { name: 'Color Bloom Blush - Risky Business', color: '#C85244', why: 'Terracota cálido de alta pigmentación para piel bronceada.' },
+          neutral: { name: 'Color Bloom Blush - Rose Ritual', color: '#BE5A68', why: 'Rosa intenso equilibrado con acabado efecto filtro.' },
+          cool: { name: 'Color Bloom Blush - Swipe Right', color: '#A84260', why: 'Ciruela suave que ilumina sin verse cenizo.' }
         },
         deep: {
-          neutral: { name: 'Color Bloom Blush - Berry Season', color: '#882A45', why: 'Fórmula saturada que se aprecia nítida en piel oscura.' },
-          warm: { name: 'Color Bloom Blush - Hot Chili', color: '#C83A2A', why: 'Terracota carmesí para un resplandor cálido.' },
-          cool: { name: 'Color Bloom Blush - Night Drive', color: '#A53856', why: 'Vino frío con fondo azulado que luce regio.' }
+          warm: { name: 'Color Bloom Blush - Crimson Glow', color: '#B33939', why: 'Rojo ladrillo cálido con luminosidad espectacular en piel profunda.' },
+          neutral: { name: 'Color Bloom Blush - Berry Bliss', color: '#94354F', why: 'Baya rico y saturado que mantiene su color todo el día.' },
+          cool: { name: 'Color Bloom Blush - Midnight Plum', color: '#7D2E53', why: 'Violeta baya profundo diseñado para subtonos fríos oscuros.' }
         }
       },
       foundation: {
         fair: {
-          neutral: { name: 'Skinfinite Foundation - Porcelain (101)', color: '#F7E7DD', why: 'Fórmula que unifica sin efecto acartonado.' },
-          warm: { name: 'Skinfinite Foundation - Warm Ivory (102)', color: '#F8E4CE', why: 'Pigmento amarillo suave que suaviza rojeces.' },
-          cool: { name: 'Skinfinite Foundation - Shell (100)', color: '#FCE6DE', why: 'Base equilibrada con reflejo rosado saludable.' }
+          warm: { name: 'Skinfinite Foundation - Fair 102 (Warm)', color: '#F6E3CE', why: 'Matiz marfil dorado que neutraliza zonas rosadas.' },
+          neutral: { name: 'Skinfinite Foundation - Porcelain 101', color: '#F7E7DD', why: 'Equilibrio exacto entre tonos crema y porcelana.' },
+          cool: { name: 'Skinfinite Foundation - Alabaster 100', color: '#F9E6E4', why: 'Base porcelana con sutil matiz rosado fresco.' }
         },
         light: {
-          neutral: { name: 'Skinfinite Foundation - Nude (105)', color: '#ECD0B7', why: 'Fusión exacta con tez clara; acabado aterciopelado.' },
-          warm: { name: 'Skinfinite Foundation - Golden Light (106)', color: '#E9C7A4', why: 'Realza el bronceado sutil y aporta luminosidad.' },
-          cool: { name: 'Skinfinite Foundation - Petal Beige (104)', color: '#EBCBBF', why: 'Aporta frescura y luminosidad natural.' }
+          warm: { name: 'Skinfinite Foundation - Sand 106', color: '#EDD1B2', why: 'Beige claro con subtono dorado natural.' },
+          neutral: { name: 'Skinfinite Foundation - Nude 105', color: '#ECD0B7', why: 'Tono piel neutro que se funde sin dejar marcas.' },
+          cool: { name: 'Skinfinite Foundation - Ivory Rose 104', color: '#EED0C8', why: 'Beige rosado claro de cobertura transpirable.' }
         },
         medium: {
-          neutral: { name: 'Skinfinite Foundation - Honey (202)', color: '#D4A47E', why: 'El tono medio ideal para evitar el efecto opaco.' },
-          warm: { name: 'Skinfinite Foundation - Warm Sand (204)', color: '#CB9868', why: 'Subtono dorado perfecto para pieles latinas.' },
-          cool: { name: 'Skinfinite Foundation - Cool Tan (201)', color: '#C99882', why: 'Fija el tono manteniendo la frescura todo el día.' }
+          warm: { name: 'Skinfinite Foundation - Honey 202', color: '#D4A47E', why: 'Tono miel dorado que aporta calidez uniforme.' },
+          neutral: { name: 'Skinfinite Foundation - Natural Tan 201', color: '#D2A786', why: 'Medio neutro balanceado que evita oxidación.' },
+          cool: { name: 'Skinfinite Foundation - Toasted Almond 203', color: '#CCA189', why: 'Beige medio con subtono frío equilibrado.' }
         },
         tan: {
-          neutral: { name: 'Skinfinite Foundation - Caramel (301)', color: '#A86F46', why: 'Cobertura impecable con micropigmentos minerales.' },
-          warm: { name: 'Skinfinite Foundation - Warm Almond (303)', color: '#9E6539', why: 'Matiz bronceado radiante sin sensación pesada.' },
-          cool: { name: 'Skinfinite Foundation - Amber (302)', color: '#9D6246', why: 'Estructura el contorno con máxima naturalidad.' }
+          warm: { name: 'Skinfinite Foundation - Caramel 301', color: '#A86F46', why: 'Caramelo cálido con acabado satinado segunda piel.' },
+          neutral: { name: 'Skinfinite Foundation - Amber 302', color: '#A3704E', why: 'Bronce medio neutro de larga duración.' },
+          cool: { name: 'Skinfinite Foundation - Hazelnut 303', color: '#9A6950', why: 'Avellana con matiz frío que evita tonos anaranjados.' }
         },
         deep: {
-          neutral: { name: 'Skinfinite Foundation - Espresso (402)', color: '#573322', why: 'Formulada para no dejar velo blanco en fotografía.' },
-          warm: { name: 'Skinfinite Foundation - Rich Cocoa (404)', color: '#522F1E', why: 'Riqueza profunda con ingredientes humectantes.' },
-          cool: { name: 'Skinfinite Foundation - Ebony (401)', color: '#442318', why: 'Pigmentación uniforme para tez muy profunda.' }
+          warm: { name: 'Skinfinite Foundation - Mocha Gold 401', color: '#6E4229', why: 'Chocolate cálido intenso con pigmentos puros.' },
+          neutral: { name: 'Skinfinite Foundation - Espresso 402', color: '#5E3826', why: 'Tono profundo neutro de cobertura uniforme.' },
+          cool: { name: 'Skinfinite Foundation - Truffle 403', color: '#523228', why: 'Cacao profundo con subtono frío sin efecto grisáceo.' }
         }
       },
       lip: {
         fair: {
-          neutral: { name: 'Plump Lip Balm - Pink Flamingo', color: '#E47B89', why: 'Efecto labio mordido con brillo no pegajoso.' },
-          warm: { name: 'Plump Lip Balm - Sepia Kiss', color: '#C27361', why: 'Calidez melocotón sutil que favorece la sonrisa.' },
-          cool: { name: 'Plump Lip Balm - Bubblegum Glow', color: '#E56D9B', why: 'Rosa frío vibrante que ilumina el rostro.' }
+          warm: { name: 'Plump Lip Balm - Peachy Keen', color: '#E59683', why: 'Melocotón jugoso que ilumina el rostro al instante.' },
+          neutral: { name: 'Plump Lip Balm - Pink Flamingo', color: '#E47B89', why: 'Rosa natural efecto labios mordidos.' },
+          cool: { name: 'Plump Lip Balm - Rose Quartz', color: '#BE5E7E', why: 'Rosa frío con brillo espejo hidratante.' }
         },
         light: {
-          neutral: { name: 'Plump Lip Balm - In Bloom', color: '#CE6C7B', why: 'Nude clásico que resalta la forma natural.' },
-          warm: { name: 'Plump Lip Balm - Cinnamon Swirl', color: '#B86851', why: 'Canela cálido perfecto para el uso diario.' },
-          cool: { name: 'Plump Lip Balm - Rose Quartz', color: '#BE5E7E', why: 'Efecto volumen con reflejos nacarados.' }
+          warm: { name: 'Plump Lip Balm - Sepia Kiss', color: '#C27361', why: 'Nude caramelo suave ideal para uso diario.' },
+          neutral: { name: 'Plump Lip Balm - Pink Flamingo', color: '#E47B89', why: 'Rosa equilibrado que favorece cualquier maquillaje.' },
+          cool: { name: 'Plump Lip Balm - Berry Glaze', color: '#B25574', why: 'Tono frambuesa translúcido muy favorecedor.' }
         },
         medium: {
-          neutral: { name: 'Plump Lip Balm - Walk on the Beach', color: '#AA5E53', why: 'Labios definidos sin resecar ni marcar líneas.' },
-          warm: { name: 'Plump Lip Balm - Toffee Treat', color: '#9E5540', why: 'Caramelo tostado con péptidos hidratantes.' },
-          cool: { name: 'Plump Lip Balm - Wild Berry', color: '#974561', why: 'Baya jugosa con nutrición de manteca de karité.' }
+          warm: { name: 'Plump Lip Balm - Spiced Latte', color: '#B36852', why: 'Marrón cálido suave que realza pieles medias.' },
+          neutral: { name: 'Plump Lip Balm - Sepia Kiss', color: '#C27361', why: 'Nude rosado cálido de acabado jugoso.' },
+          cool: { name: 'Plump Lip Balm - Mauve Magic', color: '#A3546B', why: 'Malva elegante con volumen hidratante.' }
         },
         tan: {
-          neutral: { name: 'Plump Lip Balm - Hot Cocoa', color: '#7E4337', why: 'Tono café cremoso de alta definición.' },
-          warm: { name: 'Plump Lip Balm - Spiced Chai', color: '#88432F', why: 'Tono especiado que resalta el bronceado.' },
-          cool: { name: 'Plump Lip Balm - Mulberry Glaze', color: '#722E46', why: 'Profundidad elegante para cualquier momento.' }
+          warm: { name: 'Plump Lip Balm - Hot Cocoa', color: '#7E4337', why: 'Chocolate brillante que contrasta hermoso en piel bronceada.' },
+          neutral: { name: 'Plump Lip Balm - Spiced Latte', color: '#B36852', why: 'Nude tostado cremoso y sin sensación pegajosa.' },
+          cool: { name: 'Plump Lip Balm - Plum Crush', color: '#873A54', why: 'Ciruela glaseado de alto impacto.' }
         },
         deep: {
-          neutral: { name: 'Plump Lip Balm - Dark Espresso', color: '#4D2922', why: 'Brillo café intenso con hidratación continua.' },
-          warm: { name: 'Plump Lip Balm - Mahogany Shine', color: '#562B21', why: 'Lustre sofisticado sin sensación grasosa.' },
-          cool: { name: 'Plump Lip Balm - Black Cherry', color: '#461E2E', why: 'Cereza oscura con destellos sutiles.' }
+          warm: { name: 'Plump Lip Balm - Rich Espresso', color: '#633227', why: 'Cacao intenso con destello espejo.' },
+          neutral: { name: 'Plump Lip Balm - Hot Cocoa', color: '#7E4337', why: 'Marrón cálido profundo de hidratación prolongada.' },
+          cool: { name: 'Plump Lip Balm - Black Cherry', color: '#6E263E', why: 'Cereza oscuro brillante que resalta en piel profunda.' }
         }
+      }
+    };
+
+    /* Perfiles dinámicos según el tipo de maquillaje que busque el usuario */
+    const makeupProfiles = {
+      blush: {
+        icon: '🌸',
+        reviews: '(42,890 valoraciones)',
+        verdict: 'Fórmula modulable; no levanta la base y se difumina sin dejar parches.',
+        categoryMatch: 'blush',
+        shades: [
+          { name: 'Love Cake', color: '#ED929C', finish: 'Mate Sedoso' },
+          { name: 'Birthday Suit', color: '#D98980', finish: 'Efecto Jugoso' },
+          { name: 'Rose Ritual', color: '#BE5A68', finish: 'Mate Profundo' },
+          { name: 'Float On', color: '#E67B66', finish: 'Cálido Natural' }
+        ]
+      },
+      foundation: {
+        icon: '✨',
+        reviews: '(29,410 valoraciones)',
+        verdict: 'Cobertura transpirable que se adapta al subtono sin oxidarse durante el día.',
+        categoryMatch: 'foundation',
+        shades: [
+          { name: 'Porcelain 101', color: '#F7E7DD', finish: 'Satinado Natural' },
+          { name: 'Nude 105', color: '#ECD0B7', finish: 'Segunda Piel' },
+          { name: 'Honey 202', color: '#D4A47E', finish: 'Satinado' },
+          { name: 'Caramel 301', color: '#A86F46', finish: 'Luminoso Suave' }
+        ]
+      },
+      contour: {
+        icon: '🤎',
+        reviews: '(31,420 valoraciones)',
+        verdict: 'Subtono frío/neutro ideal para esculpir facciones sin dejar manchas naranjas.',
+        categoryMatch: 'foundation',
+        shades: [
+          { name: 'Soft Tan', color: '#A98268', finish: 'Mate Natural' },
+          { name: 'Golden Sun', color: '#9B6F50', finish: 'Bronce Suave' },
+          { name: 'Warm Honey', color: '#875B3E', finish: 'Mate Esculpido' },
+          { name: 'Terracotta', color: '#70452C', finish: 'Intenso' }
+        ]
+      },
+      lip: {
+        icon: '💋',
+        reviews: '(24,310 valoraciones)',
+        verdict: 'Color uniforme con hidratación activa; cómodo y sin sensación pegajosa.',
+        categoryMatch: 'lip',
+        shades: [
+          { name: 'Pink Flamingo', color: '#E47B89', finish: 'Brillo Espejo' },
+          { name: 'Sepia Kiss', color: '#C27361', finish: 'Nude Jugoso' },
+          { name: 'Rose Quartz', color: '#BE5E7E', finish: 'Volumen Suave' },
+          { name: 'Hot Cocoa', color: '#7E4337', finish: 'Glaseado' }
+        ]
+      },
+      eye: {
+        icon: '👁️',
+        reviews: '(19,840 valoraciones)',
+        verdict: 'Alta pigmentación y resistencia al agua/sudor sin correr ni transferir.',
+        categoryMatch: 'lip',
+        shades: [
+          { name: 'Noir Intenso', color: '#221F20', finish: 'Mate Alta Fijación' },
+          { name: 'Espresso Brown', color: '#593A2E', finish: 'Natural Definido' },
+          { name: 'Champagne Shimmer', color: '#E8C7B2', finish: 'Destello Luminoso' },
+          { name: 'Rose Gold', color: '#D48C84', finish: 'Metálico Suave' }
+        ]
       }
     };
 
@@ -1032,11 +1171,111 @@
       renderReviews(reviewsData);
       updateMatcherResults();
       updateSavedUI();
+      
+      // Permite abrir directamente cualquier producto escrito en URL (?producto=Corrector Liquido)
+      const params = new URLSearchParams(window.location.search);
+      const prodParam = params.get('producto');
+      if (prodParam) {
+        document.getElementById('sheglam-search-input').value = prodParam;
+        adaptPageToProduct(prodParam);
+      }
     });
+
+    function handleCustomProductSearch(e) {
+      e.preventDefault();
+      const input = document.getElementById('sheglam-search-input');
+      const query = input.value.trim();
+      if (!query) {
+        showToastNotification('Escribe el nombre del maquillaje que quieres analizar.');
+        return;
+      }
+      adaptPageToProduct(query);
+    }
+
+    function adaptPageToProduct(query) {
+      const q = query.toLowerCase();
+      let profileKey = 'blush';
+
+      if (q.includes('base') || q.includes('corrector') || q.includes('concealer') || q.includes('polvo') || q.includes('primer') || q.includes('bb')) {
+        profileKey = 'foundation';
+      } else if (q.includes('contorno') || q.includes('bronzer') || q.includes('bronceador') || q.includes('contour')) {
+        profileKey = 'contour';
+      } else if (q.includes('labial') || q.includes('gloss') || q.includes('tinta') || q.includes('bálsamo') || q.includes('balsamo') || q.includes('lip')) {
+        profileKey = 'lip';
+      } else if (q.includes('rímel') || q.includes('rimel') || q.includes('delineador') || q.includes('sombra') || q.includes('ceja') || q.includes('pestaña')) {
+        profileKey = 'eye';
+      }
+
+      const profile = makeupProfiles[profileKey];
+      // Formatear título capitalizado con el nombre escrito por el usuario
+      const formattedTitle = query.charAt(0).toUpperCase() + query.slice(1);
+      state.customProductTitle = formattedTitle;
+
+      document.getElementById('hero-product-icon').innerText = profile.icon;
+      document.getElementById('hero-product-title').innerText = formattedTitle;
+      document.getElementById('hero-product-reviews').innerText = profile.reviews;
+      document.getElementById('hero-product-verdict').innerHTML = `<i class="ph-fill ph-seal-check text-emerald-600 text-base shrink-0"></i><span><strong>Veredicto LUMÉRA para ${formattedTitle}:</strong> ${profile.verdict}</span>`;
+
+      const shadesContainer = document.getElementById('hero-shades-buttons');
+      const buttonsHtml = profile.shades.map(s => `
+        <button onclick="setHeroShade('${s.name}', '${s.color}', '${s.finish}')" class="w-6 h-6 rounded-full border-2 border-white shadow hover:scale-110 transition-transform" style="background-color: ${s.color};" title="${s.name}"></button>
+      `).join('');
+
+      shadesContainer.innerHTML = `<span class="text-[11px] text-gray-500">Probar tonos:</span>` + buttonsHtml;
+
+      const firstShade = profile.shades[0];
+      setHeroShade(firstShade.name, firstShade.color, firstShade.finish);
+      selectCategory(profile.categoryMatch);
+
+      // Generar reseña adaptada dinámicamente al producto buscado
+      const customReview = {
+        id: Date.now(),
+        author: 'Comunidad Verificada',
+        type: 'grasa',
+        skinTone: 'Todos los subtonos',
+        shade: firstShade.name,
+        stars: 5,
+        badge: 'Análisis del Producto',
+        text: `Sobre "${formattedTitle}": ${profile.verdict} Muy buena relación calidad-rendimiento según las compradoras recientes.`,
+        wearTime: 'Hasta 12 horas',
+        date: 'Actualizado hoy'
+      };
+      renderReviews([customReview, ...reviewsData]);
+      showToastNotification(`Página adaptada a: ${formattedTitle}`);
+    }
+
+    function openConfirmSheinModal() {
+      document.getElementById('confirm-product-name').innerText = `SHEGLAM ${state.customProductTitle}`;
+      document.getElementById('confirm-shade-name').innerText = state.heroCurrentShade.name;
+      document.getElementById('confirm-finish-name').innerText = `${state.heroCurrentShade.finish} · Verificado`;
+
+      document.getElementById('confirm-shein-modal').classList.remove('hidden');
+      document.getElementById('confirm-shein-modal').classList.add('flex');
+    }
+
+    function closeConfirmSheinModal() {
+      document.getElementById('confirm-shein-modal').classList.add('hidden');
+      document.getElementById('confirm-shein-modal').classList.remove('flex');
+    }
+
+    function copyConfirmedDetails() {
+      const textToCopy = `SHEGLAM ${state.customProductTitle} - Tono: ${state.heroCurrentShade.name}`;
+      const tempInput = document.createElement('input');
+      tempInput.value = textToCopy;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+
+      showToastNotification(`¡Copiado! "${textToCopy}" listo para buscar en SHEIN.`);
+      closeConfirmSheinModal();
+    }
 
     function setHeroShade(name, color, finish) {
       state.heroCurrentShade = { name, color, finish };
       document.getElementById('hero-active-shade-name').innerText = name;
+      const finishTag = document.getElementById('hero-finish-tag');
+      if (finishTag) finishTag.innerText = finish;
       const blend = document.getElementById('hero-blush-blend');
       blend.style.background = `radial-gradient(circle, ${color} 20%, transparent 80%)`;
       showToastNotification(`Tono cambiado a: ${name}`);
@@ -1045,7 +1284,7 @@
     function saveHeroShade() {
       addSavedShade({
         id: Date.now(),
-        product: `Rubor Líquido Color Bloom - ${state.heroCurrentShade.name}`,
+        product: `${state.customProductTitle} - ${state.heroCurrentShade.name}`,
         color: state.heroCurrentShade.color,
         details: `Acabado: ${state.heroCurrentShade.finish}`
       });
